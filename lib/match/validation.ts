@@ -9,15 +9,15 @@ function validatePerson(
   errors: MatchFormErrors,
 ) {
   if (!person.name.trim()) {
-    errors[`${prefix}.name`] = "이름을 먼저 알려주세요.";
+    errors[`${prefix}.name`] = "이름을 입력해 주시면 리포트를 준비할 수 있어요.";
   }
 
   if (!DATE_REGEX.test(person.birthDate)) {
-    errors[`${prefix}.birthDate`] = "생년월일을 확인해 주세요.";
+    errors[`${prefix}.birthDate`] = "생년월일을 확인해 주세요. 리포트 해석에 꼭 필요한 정보예요.";
   }
 
   if (!person.birthTimeUnknown && !TIME_REGEX.test(person.birthTime)) {
-    errors[`${prefix}.birthTime`] = "출생시간을 모르시면 위 체크 항목을 선택해 주세요.";
+    errors[`${prefix}.birthTime`] = "출생시간을 모른다면 위 체크 항목을 선택해 주세요.";
   }
 }
 

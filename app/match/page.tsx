@@ -44,8 +44,8 @@ function PersonFields({
 
   const sectionHint =
     tone === "violet"
-      ? "기준이 되는 사람 정보를 먼저 적어 주세요."
-      : "비교할 상대 정보를 이어서 적어 주세요.";
+      ? "리포트 기준이 되는 사람 정보를 먼저 입력해 주세요."
+      : "함께 해석할 상대 정보를 이어서 입력해 주세요.";
 
   return (
     <fieldset className={`surface-card space-y-4 p-4 ${toneStyle} fade-up sm:p-5`}>
@@ -101,9 +101,9 @@ function PersonFields({
               })
             }
           />
-          출생시간을 모르겠어요
+          출생시간을 모르겠어요 (선택 입력)
         </label>
-        <p className="text-xs leading-5 text-slate-500">시간은 선택 입력이에요. 모르시면 체크하고 넘어가도 괜찮아요.</p>
+        <p className="text-xs leading-5 text-slate-500">출생시간은 선택 항목이에요. 모르면 체크하고 다음 단계로 넘어가도 괜찮아요.</p>
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-slate-700" htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
@@ -115,7 +115,7 @@ function PersonFields({
             onChange={(event) => onChange({ ...person, birthTime: event.target.value })}
             disabled={person.birthTimeUnknown}
           />
-          <p className="text-xs leading-5 text-slate-500">알고 있다면 입력해 주세요. 결과를 조금 더 섬세하게 볼 수 있어요.</p>
+          <p className="text-xs leading-5 text-slate-500">알고 있다면 입력해 주세요. 관계 흐름을 조금 더 섬세하게 정리할 수 있어요.</p>
           {errors[`${fieldKey}.birthTime`] ? (
             <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.birthTime`]}</p>
           ) : null}
@@ -161,9 +161,9 @@ export default function MatchPage() {
     <div className="section-gap">
       <section className="surface-card space-y-3 fade-up">
         <p className="section-head">🧾 리포트 준비하기</p>
-        <h1 className="title-xl">궁합 정보 입력</h1>
-        <p className="body-md max-w-2xl text-pretty">두 사람의 기본 정보를 차례대로 입력하면, 궁합 리포트를 바로 확인할 수 있어요.</p>
-        <p className="text-xs text-slate-500 sm:text-sm">입력은 1분 내외로 끝나요. 출생시간은 선택 입력입니다.</p>
+        <h1 className="title-xl">관계 리포트 정보 입력</h1>
+        <p className="body-md max-w-2xl text-pretty">두 사람의 기본 정보를 차례대로 입력하면, 관계 해석 리포트를 바로 확인할 수 있어요.</p>
+        <p className="text-xs text-slate-500 sm:text-sm">입력은 1분 내외로 끝나요. 필요한 정보만 채우면 리포트 준비가 완료돼요.</p>
       </section>
 
       <form className="space-y-4 pb-28 sm:space-y-5 sm:pb-0" onSubmit={handleSubmit} noValidate>
@@ -190,23 +190,23 @@ export default function MatchPage() {
 
         {hasError ? (
           <p className="rounded-2xl border border-rose-200/80 bg-rose-50/80 px-3 py-2.5 text-sm text-rose-700">
-            몇 가지 정보가 비어 있어요. 표시된 항목만 채우면 바로 확인할 수 있어요.
+            아직 비어 있는 항목이 있어요. 표시된 정보만 채우면 리포트를 바로 확인할 수 있어요.
           </p>
         ) : null}
 
         <div className="fixed inset-x-0 bottom-0 z-20 border-t border-violet-100/80 bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 shadow-[0_-10px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:shadow-none">
-          <p className="mb-2 text-center text-xs text-slate-500 sm:hidden">입력을 마치면 아래 버튼으로 바로 결과를 확인해요.</p>
+          <p className="mb-2 text-center text-xs text-slate-500 sm:hidden">입력을 마치면 아래 버튼으로 관계 리포트를 확인해요.</p>
           <button type="submit" className="btn-primary w-full text-base sm:w-auto sm:text-sm disabled:cursor-not-allowed disabled:opacity-70" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/50 border-t-white" aria-hidden />
-                리포트 만드는 중...
+                리포트 정리 중...
               </>
             ) : (
-              "💫 궁합 리포트 확인하기"
+              "💫 관계 리포트 확인하기"
             )}
           </button>
-          {isSubmitting ? <p className="mt-2 text-center text-xs text-slate-500">입력한 정보를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
+          {isSubmitting ? <p className="mt-2 text-center text-xs text-slate-500">입력한 정보를 바탕으로 리포트를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
         </div>
       </form>
     </div>
