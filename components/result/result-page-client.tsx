@@ -109,7 +109,7 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
       try {
         await navigator.share({
           title: "관계 리포트",
-          text: "두 사람 관계 흐름 리포트를 함께 읽어 보세요.",
+          text: "두 사람의 관계 흐름을 정리한 리포트를 함께 확인해 보세요.",
           url: shareUrl,
         });
         setShareStatus("success");
@@ -191,9 +191,9 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
               {result.summary.personAName} <span className="text-violet-500">×</span> {result.summary.personBName}
             </h1>
             <div className="flex flex-wrap items-center gap-2">
-              <p className="badge-soft max-w-full break-words">해석 유형 · {result.summary.relationType}</p>
+              <p className="badge-soft max-w-full break-words">관계 리듬 유형 · {result.summary.relationType}</p>
               <p className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-medium text-violet-700">
-                해석 점수 {result.summary.score}점
+                리포트 지표 {result.summary.score} / 100
               </p>
             </div>
             <p className="rounded-2xl border border-violet-100 bg-violet-50/60 px-3.5 py-3 text-sm font-medium leading-6 text-slate-700 sm:px-4 sm:text-base">
@@ -205,50 +205,50 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
         <div className="rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-3">
           <p className="text-xs font-semibold tracking-wide text-slate-500">리포트 읽는 순서</p>
           <p className="mt-1 text-sm leading-6 text-slate-600">
-            핵심 해석에서 전체 흐름을 먼저 읽고, 강점과 조율 포인트를 지나 관계 유지 팁까지 보면 실천 포인트를 더 선명하게 정리할 수 있어요.
+            요약 지표로 현재 흐름을 먼저 확인하고, 핵심 관찰 → 맞는 흐름 → 조율 메모 → 유지 가이드 순서로 읽으면 활용 포인트가 더 또렷해져요.
           </p>
         </div>
       </header>
 
       <ResultSection
-        title="핵심 해석"
+        title="핵심 관찰"
         icon="🔎"
         toneLabel="먼저 읽기"
-        description="지금 관계의 흐름을 빠르게 파악할 수 있도록 정리한 핵심 요약입니다."
+        description="현재 관계에서 먼저 짚어야 할 흐름을 관찰 중심으로 정리했어요."
       >
         <ResultList items={result.coreInterpretations} />
       </ResultSection>
 
       <ResultSection
-        title="잘 맞는 점"
+        title="맞는 흐름"
         icon="🤝"
-        toneLabel="강점"
-        description="두 사람의 호흡이 자연스럽게 맞물리는 영역을 정리했어요."
+        toneLabel="강점 관찰"
+        description="두 사람의 호흡이 자연스럽게 이어지는 장면을 모아 봤어요."
       >
         <ResultList items={result.strengths} />
       </ResultSection>
 
       <ResultSection
-        title="조율 포인트"
+        title="조율 메모"
         icon="🎛️"
-        toneLabel="균형"
-        description="작은 조정으로 긴장을 줄이고 더 편안해질 수 있는 지점을 담았어요."
+        toneLabel="균형 정리"
+        description="부담을 키우지 않으면서 흐름을 맞출 수 있는 지점을 정리했어요."
       >
         <ResultList items={result.adjustments} />
       </ResultSection>
 
       <ResultSection
-        title="관계 유지 팁"
+        title="유지 가이드"
         icon="🌱"
-        toneLabel="실천"
-        description="일상에서 가볍게 적용할 수 있는 현실적인 제안만 골랐어요."
+        toneLabel="실행 힌트"
+        description="일상에 바로 적용할 수 있도록 짧고 현실적인 행동 제안으로 정리했어요."
       >
         <ResultList items={result.relationshipTips} />
       </ResultSection>
 
       <section className="surface-card space-y-3 fade-up" id="share-section">
         <p className="section-head">🔗 리포트 공유</p>
-        <p className="body-md">리포트를 다 읽었다면 링크를 공유해 같은 해석을 함께 읽어 보세요.</p>
+        <p className="body-md">이 리포트를 함께 읽고 대화하면, 같은 장면을 더 빠르게 맞춰 볼 수 있어요.</p>
         <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
           <button type="button" className="btn-primary w-full sm:w-auto" onClick={shareResult}>
             리포트 공유
@@ -257,15 +257,15 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
             링크 복사
           </button>
         </div>
-        {shareStatus === "success" ? <p className="text-sm text-emerald-700">공유 창을 열었어요. 지금 바로 전달해 보세요.</p> : null}
-        {shareStatus === "fallback" ? <p className="text-sm text-emerald-700">공유 기능을 사용할 수 없어 링크를 대신 복사했어요.</p> : null}
-        {copyStatus === "success" ? <p className="text-sm text-emerald-700">링크를 복사했어요. 대화를 나누는 공간에 붙여 넣어 보세요.</p> : null}
+        {shareStatus === "success" ? <p className="text-sm text-emerald-700">공유 창을 열었어요. 같은 리포트를 함께 확인해 보세요.</p> : null}
+        {shareStatus === "fallback" ? <p className="text-sm text-emerald-700">공유 기능 대신 링크를 복사했어요. 바로 전달할 수 있어요.</p> : null}
+        {copyStatus === "success" ? <p className="text-sm text-emerald-700">링크를 복사했어요. 대화 중인 공간에 붙여 넣어 보세요.</p> : null}
         {copyStatus === "error" || shareStatus === "error" ? (
           <p className="text-sm text-rose-600">지금은 공유가 원활하지 않아요. 잠시 후 다시 시도해 주세요.</p>
         ) : null}
       </section>
 
-      <ResultSection title="안내" icon="ℹ️" description="아래 내용을 함께 참고하면 리포트를 더 균형 있게 활용할 수 있어요.">
+      <ResultSection title="읽기 안내" icon="ℹ️" description="아래 기준을 함께 보면 리포트를 더 균형 있게 활용할 수 있어요.">
         <ul className="space-y-2.5 text-sm leading-7 text-slate-700 sm:space-y-3 sm:text-base">
           <li className="rounded-2xl border border-slate-100 bg-white px-3.5 py-3 break-words sm:px-4">{result.notice.referenceOnly}</li>
           <li className="rounded-2xl border border-slate-100 bg-white px-3.5 py-3 break-words sm:px-4">{result.notice.variableByInput}</li>
