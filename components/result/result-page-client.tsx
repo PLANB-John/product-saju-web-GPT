@@ -10,13 +10,13 @@ import type { StoredCompatibilityResult } from "@/types/result";
 function ScoreGauge({ score }: { score: number }) {
   return (
     <div
-      className="relative flex h-32 w-32 items-center justify-center rounded-full"
+      className="relative mx-auto flex h-28 w-28 items-center justify-center rounded-full sm:mx-0 sm:h-32 sm:w-32"
       style={{
         background: `conic-gradient(#7c3aed ${score * 3.6}deg, #ede9fe ${score * 3.6}deg 360deg)`,
       }}
     >
-      <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-white shadow-inner">
-        <p className="text-2xl font-semibold text-violet-700">{score}</p>
+      <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full bg-white shadow-inner sm:h-24 sm:w-24">
+        <p className="text-xl font-semibold text-violet-700 sm:text-2xl">{score}</p>
         <p className="text-xs text-slate-500">/ 100</p>
       </div>
     </div>
@@ -177,26 +177,26 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
 
   return (
     <div className="section-gap pb-6">
-      <header className="surface-card overflow-hidden space-y-5 fade-up">
+      <header className="surface-card overflow-hidden space-y-4 fade-up sm:space-y-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="badge-soft">저장된 결과 리포트</p>
-          <p className="text-xs font-medium tracking-wide text-violet-600">리포트 ID: {result.resultId}</p>
+          <p className="max-w-full break-all text-xs font-medium tracking-wide text-violet-600">리포트 ID: {result.resultId}</p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-[auto_1fr] sm:items-center">
+        <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-5">
           <ScoreGauge score={result.summary.score} />
 
-          <div className="space-y-3">
-            <h1 className="title-xl">
+          <div className="space-y-2.5 sm:space-y-3">
+            <h1 className="title-xl break-words">
               {result.summary.personAName} <span className="text-violet-500">×</span> {result.summary.personBName}
             </h1>
             <div className="flex flex-wrap items-center gap-2">
-              <p className="badge-soft">관계 유형 · {result.summary.relationType}</p>
+              <p className="badge-soft max-w-full break-words">관계 유형 · {result.summary.relationType}</p>
               <p className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-medium text-violet-700">
                 궁합 점수 {result.summary.score}점
               </p>
             </div>
-            <p className="rounded-2xl border border-violet-100 bg-violet-50/60 px-4 py-3 text-sm font-medium leading-6 text-slate-700 sm:text-base">
+            <p className="rounded-2xl border border-violet-100 bg-violet-50/60 px-3.5 py-3 text-sm font-medium leading-6 text-slate-700 sm:px-4 sm:text-base">
               {result.summary.oneLineSummary}
             </p>
           </div>
@@ -246,14 +246,14 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
         <ResultList items={result.relationshipTips} />
       </ResultSection>
 
-      <section className="surface-card space-y-3 fade-up">
+      <section className="surface-card space-y-3 fade-up" id="share-section">
         <p className="section-head">🔗 공유하기</p>
         <p className="body-md">리포트를 다 읽었다면, 지금 링크를 공유해 같은 결과를 함께 볼 수 있어요.</p>
-        <div className="flex flex-wrap items-center gap-2">
-          <button type="button" className="btn-primary" onClick={shareResult}>
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+          <button type="button" className="btn-primary w-full sm:w-auto" onClick={shareResult}>
             공유하기
           </button>
-          <button type="button" className="btn-secondary" onClick={copyLink}>
+          <button type="button" className="btn-secondary w-full sm:w-auto" onClick={copyLink}>
             링크 복사
           </button>
         </div>
@@ -266,19 +266,21 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
       </section>
 
       <ResultSection title="안내" icon="ℹ️" description="아래 내용을 함께 참고하면 결과를 더 균형 있게 활용할 수 있어요.">
-        <ul className="space-y-3 text-sm leading-7 text-slate-700 sm:text-base">
-          <li className="rounded-2xl border border-slate-100 bg-white px-4 py-3">{result.notice.referenceOnly}</li>
-          <li className="rounded-2xl border border-slate-100 bg-white px-4 py-3">{result.notice.variableByInput}</li>
+        <ul className="space-y-2.5 text-sm leading-7 text-slate-700 sm:space-y-3 sm:text-base">
+          <li className="rounded-2xl border border-slate-100 bg-white px-3.5 py-3 break-words sm:px-4">{result.notice.referenceOnly}</li>
+          <li className="rounded-2xl border border-slate-100 bg-white px-3.5 py-3 break-words sm:px-4">{result.notice.variableByInput}</li>
         </ul>
       </ResultSection>
 
-      <div className="flex flex-wrap justify-start gap-2">
-        <Link href="/match" className="btn-secondary w-full sm:w-auto">
-          정보 다시 입력하기
-        </Link>
-        <Link href="/" className="btn-secondary w-full sm:w-auto">
-          홈으로 가기
-        </Link>
+      <div className="sticky bottom-3 z-10 rounded-3xl border border-violet-100 bg-white/92 p-2.5 shadow-[0_8px_24px_rgba(15,23,42,0.12)] backdrop-blur sm:static sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
+        <div className="flex flex-col justify-start gap-2 sm:flex-row sm:flex-wrap">
+          <Link href="/match" className="btn-secondary w-full sm:w-auto">
+            정보 다시 입력하기
+          </Link>
+          <Link href="/" className="btn-secondary w-full sm:w-auto">
+            홈으로 가기
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ function PersonFields({
       : "비교할 상대 정보를 이어서 적어 주세요.";
 
   return (
-    <fieldset className={`surface-card space-y-4 p-4 sm:p-5 ${toneStyle} fade-up`}>
+    <fieldset className={`surface-card space-y-4 p-4 ${toneStyle} fade-up sm:p-5`}>
       <legend className="w-full px-1">
         <div className="flex flex-wrap items-center gap-2 text-sm font-semibold tracking-tight text-slate-900">
           <span className="text-base">{emoji}</span>
@@ -58,22 +58,25 @@ function PersonFields({
           </span>
         </div>
       </legend>
-      <p className="text-sm text-slate-600">{sectionHint}</p>
+      <p className="text-sm leading-6 text-slate-600">{sectionHint}</p>
 
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium text-slate-700">이름</label>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-slate-700" htmlFor={`${fieldKey}-name`}>이름</label>
         <input
+          id={`${fieldKey}-name`}
           className="input-field"
           value={person.name}
           onChange={(event) => onChange({ ...person, name: event.target.value })}
           placeholder="예: 홍길동"
+          maxLength={20}
         />
         {errors[`${fieldKey}.name`] ? <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.name`]}</p> : null}
       </div>
 
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium text-slate-700">생년월일</label>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-slate-700" htmlFor={`${fieldKey}-birth-date`}>생년월일</label>
         <input
+          id={`${fieldKey}-birth-date`}
           type="date"
           className="input-field"
           value={person.birthDate}
@@ -84,9 +87,10 @@ function PersonFields({
         ) : null}
       </div>
 
-      <div className="space-y-2.5 rounded-2xl border border-white/80 bg-white/70 p-3">
-        <label className="flex items-center gap-2 text-sm text-slate-700">
+      <div className="space-y-3 rounded-2xl border border-white/80 bg-white/70 p-3.5">
+        <label className="flex min-h-[2.5rem] items-center gap-2 text-sm text-slate-700" htmlFor={`${fieldKey}-birth-time-unknown`}>
           <input
+            id={`${fieldKey}-birth-time-unknown`}
             type="checkbox"
             checked={person.birthTimeUnknown}
             onChange={(event) =>
@@ -101,9 +105,10 @@ function PersonFields({
         </label>
         <p className="text-xs leading-5 text-slate-500">시간은 선택 입력이에요. 모르시면 체크하고 넘어가도 괜찮아요.</p>
 
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium text-slate-700">출생시간</label>
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-slate-700" htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
           <input
+            id={`${fieldKey}-birth-time`}
             type="time"
             className="input-field disabled:bg-slate-100"
             value={person.birthTime}
@@ -157,11 +162,11 @@ export default function MatchPage() {
       <section className="surface-card space-y-3 fade-up">
         <p className="section-head">🧾 리포트 준비하기</p>
         <h1 className="title-xl">궁합 정보 입력</h1>
-        <p className="body-md">두 사람의 기본 정보를 차례대로 입력하면, 궁합 리포트를 바로 확인할 수 있어요.</p>
+        <p className="body-md max-w-2xl text-pretty">두 사람의 기본 정보를 차례대로 입력하면, 궁합 리포트를 바로 확인할 수 있어요.</p>
         <p className="text-xs text-slate-500 sm:text-sm">입력은 1분 내외로 끝나요. 출생시간은 선택 입력입니다.</p>
       </section>
 
-      <form className="space-y-5 pb-24 sm:pb-0" onSubmit={handleSubmit} noValidate>
+      <form className="space-y-4 pb-28 sm:space-y-5 sm:pb-0" onSubmit={handleSubmit} noValidate>
         <PersonFields
           label="사람 1"
           emoji="🌿"
@@ -189,9 +194,9 @@ export default function MatchPage() {
           </p>
         ) : null}
 
-        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-violet-100/80 bg-white/95 p-4 shadow-[0_-10px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
+        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-violet-100/80 bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 shadow-[0_-10px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:shadow-none">
           <p className="mb-2 text-center text-xs text-slate-500 sm:hidden">입력을 마치면 아래 버튼으로 바로 결과를 확인해요.</p>
-          <button type="submit" className="btn-primary w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-70" disabled={isSubmitting}>
+          <button type="submit" className="btn-primary w-full text-base sm:w-auto sm:text-sm disabled:cursor-not-allowed disabled:opacity-70" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/50 border-t-white" aria-hidden />
