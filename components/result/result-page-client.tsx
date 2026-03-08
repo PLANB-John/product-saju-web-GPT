@@ -27,12 +27,30 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
   const [result, setResult] = useState<StoredCompatibilityResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">("idle");
+  const [shareStatus, setShareStatus] = useState<"idle" | "success" | "fallback" | "error">("idle");
 
   useEffect(() => {
-    const found = localResultRepository.getById(resultId);
-    setResult(found);
-    setIsLoading(false);
+    const timer = window.setTimeout(() => {
+      const found = localResultRepository.getById(resultId);
+      setResult(found);
+      setIsLoading(false);
+    }, 180);
+
+    return () => window.clearTimeout(timer);
   }, [resultId]);
+
+  useEffect(() => {
+    if (copyStatus === "idle" && shareStatus === "idle") {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setCopyStatus("idle");
+      setShareStatus("idle");
+    }, 2400);
+
+    return () => window.clearTimeout(timer);
+  }, [copyStatus, shareStatus]);
 
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") {
@@ -44,23 +62,46 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
 
   const copyLink = async () => {
     if (!shareUrl) {
-      return;
+      setCopyStatus("error");
+      return false;
+    }
+
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopyStatus("success");
+        return true;
+      } catch {
+        // fallback 처리
+      }
     }
 
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopyStatus("success");
+      const textArea = document.createElement("textarea");
+      textArea.value = shareUrl;
+      textArea.setAttribute("readonly", "");
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.select();
+      const copied = document.execCommand("copy");
+      document.body.removeChild(textArea);
+
+      if (copied) {
+        setCopyStatus("success");
+        return true;
+      }
     } catch {
-      setCopyStatus("error");
+      // 아래에서 에러 상태 처리
     }
 
-    window.setTimeout(() => {
-      setCopyStatus("idle");
-    }, 2000);
+    setCopyStatus("error");
+    return false;
   };
 
   const shareResult = async () => {
     if (!shareUrl) {
+      setShareStatus("error");
       return;
     }
 
@@ -71,37 +112,64 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
           text: "두 사람 궁합 리포트를 확인해 보세요.",
           url: shareUrl,
         });
+        setShareStatus("success");
         return;
       } catch {
         // 공유를 취소한 경우를 포함해 복사 fallback 사용
       }
     }
 
-    await copyLink();
+    const copied = await copyLink();
+    if (copied) {
+      setCopyStatus("idle");
+      setShareStatus("fallback");
+      return;
+    }
+
+    setShareStatus("error");
   };
 
   if (isLoading) {
     return (
       <div className="section-gap pb-6">
-        <section className="surface-card fade-up">
-          <p className="body-md">결과 리포트를 준비하고 있어요...</p>
+        <section className="surface-card space-y-3 fade-up" aria-live="polite">
+          <p className="section-head">✨ 리포트 확인 중</p>
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-violet-200 border-t-violet-600" aria-hidden />
+            저장된 결과를 불러오고 있어요.
+          </div>
         </section>
       </div>
     );
   }
 
+  const retryLoad = () => {
+    setIsLoading(true);
+    window.setTimeout(() => {
+      const found = localResultRepository.getById(resultId);
+      setResult(found);
+      setIsLoading(false);
+    }, 180);
+  };
+
   if (!result) {
     return (
       <div className="section-gap pb-6">
         <section className="surface-card space-y-4 fade-up">
-          <p className="section-head">🔍 결과를 찾을 수 없어요</p>
-          <h1 className="title-xl">요청하신 궁합 결과를 확인하지 못했어요.</h1>
-          <p className="body-md">
-            링크가 만료되었거나, 현재 기기에 저장되지 않은 결과일 수 있어요. 입력 화면으로 돌아가 새 리포트를 다시 만들어 보세요.
-          </p>
-          <Link href="/match" className="btn-primary w-full sm:w-auto">
-            다시 궁합 시작하기
-          </Link>
+          <p className="section-head">🔍 아직 결과를 찾지 못했어요</p>
+          <h1 className="title-xl">요청하신 궁합 리포트가 보이지 않아요.</h1>
+          <p className="body-md">링크가 오래되었거나, 이 기기에서 만든 결과가 아닐 수 있어요. 아래에서 다시 시작하면 바로 새 리포트를 확인할 수 있어요.</p>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/match" className="btn-primary w-full sm:w-auto">
+              다시 궁합 시작하기
+            </Link>
+            <button type="button" className="btn-secondary w-full sm:w-auto" onClick={retryLoad}>
+              같은 링크 다시 확인
+            </button>
+            <Link href="/" className="btn-secondary w-full sm:w-auto">
+              홈으로 가기
+            </Link>
+          </div>
         </section>
       </div>
     );
@@ -188,9 +256,13 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
           <button type="button" className="btn-secondary" onClick={copyLink}>
             링크 복사
           </button>
-          {copyStatus === "success" ? <p className="text-sm text-emerald-700">링크가 복사됐어요.</p> : null}
-          {copyStatus === "error" ? <p className="text-sm text-rose-600">복사에 실패했어요. 다시 시도해 주세요.</p> : null}
         </div>
+        {shareStatus === "success" ? <p className="text-sm text-emerald-700">공유 창을 열었어요.</p> : null}
+        {shareStatus === "fallback" ? <p className="text-sm text-emerald-700">공유 기능이 어려워서 링크를 대신 복사했어요.</p> : null}
+        {copyStatus === "success" ? <p className="text-sm text-emerald-700">링크를 복사했어요. 원하는 곳에 붙여 넣어 보세요.</p> : null}
+        {copyStatus === "error" || shareStatus === "error" ? (
+          <p className="text-sm text-rose-600">지금은 공유가 원활하지 않아요. 잠시 후 다시 시도해 주세요.</p>
+        ) : null}
       </section>
 
       <ResultSection title="안내" icon="ℹ️" description="아래 내용을 함께 참고하면 결과를 더 균형 있게 활용할 수 있어요.">
@@ -200,9 +272,12 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
         </ul>
       </ResultSection>
 
-      <div className="flex justify-start">
+      <div className="flex flex-wrap justify-start gap-2">
         <Link href="/match" className="btn-secondary w-full sm:w-auto">
           정보 다시 입력하기
+        </Link>
+        <Link href="/" className="btn-secondary w-full sm:w-auto">
+          홈으로 가기
         </Link>
       </div>
     </div>
