@@ -31,37 +31,37 @@ function PersonFields({
   onChange: (next: PersonInput) => void;
 }) {
   return (
-    <fieldset className="space-y-3 rounded-lg border border-slate-200 bg-white p-4">
-      <legend className="px-1 text-sm font-semibold text-slate-900">{label}</legend>
+    <fieldset className="surface-card space-y-4 p-4 sm:p-5">
+      <legend className="px-1 text-sm font-semibold tracking-tight text-slate-900">{label}</legend>
 
-      <div className="space-y-1">
-        <label className="text-sm">이름</label>
+      <div className="space-y-1.5">
+        <label className="text-sm font-medium text-slate-700">이름</label>
         <input
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+          className="input-field"
           value={person.name}
           onChange={(event) => onChange({ ...person, name: event.target.value })}
           placeholder="홍길동"
         />
         {errors[`${fieldKey}.name`] ? (
-          <p className="text-xs text-rose-600">{errors[`${fieldKey}.name`]}</p>
+          <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.name`]}</p>
         ) : null}
       </div>
 
-      <div className="space-y-1">
-        <label className="text-sm">생년월일</label>
+      <div className="space-y-1.5">
+        <label className="text-sm font-medium text-slate-700">생년월일</label>
         <input
           type="date"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+          className="input-field"
           value={person.birthDate}
           onChange={(event) => onChange({ ...person, birthDate: event.target.value })}
         />
         {errors[`${fieldKey}.birthDate`] ? (
-          <p className="text-xs text-rose-600">{errors[`${fieldKey}.birthDate`]}</p>
+          <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.birthDate`]}</p>
         ) : null}
       </div>
 
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm">
+      <div className="space-y-2.5">
+        <label className="flex items-center gap-2 text-sm text-slate-700">
           <input
             type="checkbox"
             checked={person.birthTimeUnknown}
@@ -76,17 +76,17 @@ function PersonFields({
           출생시간 모름
         </label>
 
-        <div className="space-y-1">
-          <label className="text-sm">출생시간</label>
+        <div className="space-y-1.5">
+          <label className="text-sm font-medium text-slate-700">출생시간</label>
           <input
             type="time"
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm disabled:bg-slate-100"
+            className="input-field disabled:bg-slate-100"
             value={person.birthTime}
             onChange={(event) => onChange({ ...person, birthTime: event.target.value })}
             disabled={person.birthTimeUnknown}
           />
           {errors[`${fieldKey}.birthTime`] ? (
-            <p className="text-xs text-rose-600">{errors[`${fieldKey}.birthTime`]}</p>
+            <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.birthTime`]}</p>
           ) : null}
         </div>
       </div>
@@ -121,34 +121,35 @@ export default function MatchPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="section-gap">
       <section className="space-y-2">
-        <h1 className="text-2xl font-bold">궁합 입력</h1>
-        <p className="text-slate-700">두 사람의 기본 정보를 입력하면 결과 페이지로 이동합니다.</p>
+        <h1 className="title-xl">궁합 입력</h1>
+        <p className="body-md">두 사람의 기본 정보를 입력하면 결과 페이지로 이동합니다.</p>
       </section>
 
-      <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+      <form className="space-y-5" onSubmit={handleSubmit} noValidate>
         <PersonFields
-          label="사용자 A"
+          label="사람 1"
           fieldKey="personA"
           person={formData.personA}
           errors={errors}
           onChange={(next) => setFormData((prev) => ({ ...prev, personA: next }))}
         />
         <PersonFields
-          label="사용자 B"
+          label="사람 2"
           fieldKey="personB"
           person={formData.personB}
           errors={errors}
           onChange={(next) => setFormData((prev) => ({ ...prev, personB: next }))}
         />
 
-        {hasError ? <p className="text-sm text-rose-600">입력값을 확인해 주세요.</p> : null}
+        {hasError ? (
+          <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+            입력값을 확인해 주세요.
+          </p>
+        ) : null}
 
-        <button
-          type="submit"
-          className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white"
-        >
+        <button type="submit" className="btn-primary w-full sm:w-auto">
           결과 보기
         </button>
       </form>

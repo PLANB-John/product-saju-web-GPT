@@ -17,19 +17,21 @@ export default function ResultPage({
   });
 
   return (
-    <div className="space-y-4 pb-6 sm:space-y-5">
-      <header className="space-y-3 rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
-        <p className="text-xs font-medium text-slate-500">결과 ID: {result.resultId}</p>
-        <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">
-          {result.summary.personAName} · {result.summary.personBName}
-        </h1>
-        <div className="flex flex-wrap items-end gap-3">
-          <p className="text-3xl font-bold text-slate-900">{result.summary.score}점</p>
-          <p className="rounded-md bg-slate-100 px-2 py-1 text-sm font-medium text-slate-700">
-            {result.summary.relationType}
-          </p>
+    <div className="section-gap pb-6">
+      <header className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-wide text-slate-500">결과 ID: {result.resultId}</p>
+          <h1 className="title-xl">
+            {result.summary.personAName} · {result.summary.personBName}
+          </h1>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-4xl font-semibold tracking-tight text-slate-900">{result.summary.score}점</p>
+            <p className="rounded-lg border border-slate-200 bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+              {result.summary.relationType}
+            </p>
+          </div>
+          <p className="body-md max-w-2xl">{result.summary.oneLineSummary}</p>
         </div>
-        <p className="text-sm leading-6 text-slate-700">{result.summary.oneLineSummary}</p>
       </header>
 
       <ResultSection title="핵심 해석" description="관계를 이해할 때 먼저 볼 핵심 포인트입니다.">
@@ -49,13 +51,13 @@ export default function ResultPage({
       </ResultSection>
 
       <ResultSection title="안내" description="해석을 활용할 때 함께 확인해 주세요.">
-        <ul className="space-y-2 text-sm leading-6 text-slate-700">
+        <ul className="space-y-2 text-sm leading-7 text-slate-700 sm:text-base">
           <li>{result.notice.referenceOnly}</li>
           <li>{result.notice.variableByInput}</li>
         </ul>
       </ResultSection>
 
-      <Link href="/match" className="inline-flex rounded-md border border-slate-300 px-3 py-2 text-sm no-underline">
+      <Link href="/match" className="btn-secondary w-full sm:w-auto">
         다시 입력하기
       </Link>
     </div>
