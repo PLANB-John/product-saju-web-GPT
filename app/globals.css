@@ -5,12 +5,17 @@
 :root {
   color-scheme: light;
   --bg-main: #fcf8f7;
-  --bg-soft: #f6e8ec;
+  --bg-soft: #f1ebe7;
   --bg-card: #ffffff;
-  --text-primary: #000000;
-  --text-secondary: #666666;
-  --text-muted: #999999;
-  --border-default: #e9e9e9;
+  --text-primary: #1f1c1a;
+  --text-secondary: #5f5a56;
+  --text-muted: #8a847e;
+  --border-default: #e5e0dc;
+  --accent-primary: #8f6f63;
+  --accent-secondary: #7d8574;
+  --accent-deep: #4e433e;
+  --btn-primary: #2f2926;
+  --btn-text: #ffffff;
 }
 
 body {
@@ -38,8 +43,20 @@ button {
     @apply space-y-5 sm:space-y-8;
   }
 
+
+  .nav-pill {
+    @apply rounded-full px-3 py-1.5 no-underline transition-colors;
+    color: var(--text-secondary);
+  }
+
+  .nav-pill:hover {
+    background-color: color-mix(in srgb, var(--accent-secondary) 10%, white);
+    color: var(--text-primary);
+  }
+
   .surface-card {
-    @apply rounded-[1.6rem] border bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.04)] backdrop-blur-sm sm:p-6;
+    @apply rounded-[1.6rem] border p-4 shadow-[0_10px_28px_rgba(31,28,26,0.04)] backdrop-blur-sm sm:p-6;
+    background-color: var(--bg-card);
     border-color: var(--border-default);
   }
 
@@ -50,47 +67,82 @@ button {
   }
 
   .accent-line {
-    @apply h-px w-full bg-[#e9e9e9];
+    @apply h-px w-full;
+    background-color: color-mix(in srgb, var(--accent-primary) 26%, var(--border-default));
   }
 
   .title-xl {
-    @apply text-[1.65rem] leading-tight font-semibold tracking-tight text-black sm:text-3xl;
+    @apply text-[1.65rem] leading-tight font-semibold tracking-tight sm:text-3xl;
+    color: var(--text-primary);
   }
 
   .title-lg {
-    @apply text-lg font-semibold tracking-tight text-black sm:text-xl;
+    @apply text-lg font-semibold tracking-tight sm:text-xl;
+    color: var(--text-primary);
   }
 
   .body-md {
-    @apply text-sm leading-6 text-[#666666] sm:text-base sm:leading-7;
+    @apply text-sm leading-6 sm:text-base sm:leading-7;
+    color: var(--text-secondary);
   }
 
   .badge-soft {
-    @apply inline-flex items-center rounded-full border bg-[#f6e8ec] px-3 py-1 text-xs font-semibold tracking-wide text-black;
-    border-color: var(--border-default);
+    @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold tracking-wide;
+    border-color: color-mix(in srgb, var(--accent-primary) 20%, var(--border-default));
+    background-color: color-mix(in srgb, var(--accent-primary) 12%, white);
+    color: var(--accent-deep);
   }
 
   .badge-muted {
-    @apply inline-flex items-center rounded-full border bg-white px-2.5 py-1 text-xs font-medium text-[#666666];
+    @apply inline-flex items-center rounded-full border bg-white px-2.5 py-1 text-xs font-medium;
     border-color: var(--border-default);
+    color: var(--text-secondary);
+  }
+
+  .badge-accent-subtle {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium;
+    border-color: color-mix(in srgb, var(--accent-secondary) 36%, var(--border-default));
+    background-color: color-mix(in srgb, var(--accent-secondary) 12%, white);
+    color: var(--accent-deep);
   }
 
   .btn-primary {
-    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white no-underline transition-colors hover:opacity-90 active:opacity-80 disabled:pointer-events-none disabled:opacity-70;
+    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold no-underline transition-colors hover:opacity-90 active:opacity-80 disabled:pointer-events-none disabled:opacity-70;
+    background-color: var(--btn-primary);
+    color: var(--btn-text);
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-[2.75rem] items-center justify-center rounded-2xl border bg-white px-4 py-2.5 text-sm font-medium text-black no-underline transition-colors hover:bg-[#f6e8ec] active:bg-[#f6e8ec] disabled:pointer-events-none disabled:opacity-60;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center rounded-2xl border px-4 py-2.5 text-sm font-medium no-underline transition-colors disabled:pointer-events-none disabled:opacity-60;
     border-color: var(--border-default);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:active {
+    background-color: color-mix(in srgb, var(--accent-secondary) 8%, white);
   }
 
   .input-field {
-    @apply w-full min-h-[2.875rem] rounded-2xl border bg-white px-3.5 py-3 text-sm text-black placeholder:text-[#999999] transition-colors focus:border-black;
+    @apply w-full min-h-[2.875rem] rounded-2xl border px-3.5 py-3 text-sm transition-colors;
     border-color: var(--border-default);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+  }
+
+  .input-field::placeholder {
+    color: var(--text-muted);
+  }
+
+  .input-field:focus {
+    border-color: color-mix(in srgb, var(--accent-deep) 54%, var(--border-default));
   }
 
   .section-head {
-    @apply inline-flex items-center gap-2 rounded-full bg-[#f6e8ec] px-3 py-1 text-xs font-semibold tracking-wide text-black sm:text-sm;
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold tracking-wide sm:text-sm;
+    background-color: color-mix(in srgb, var(--accent-primary) 12%, white);
+    color: var(--accent-deep);
   }
 
   .section-title-wrap {

@@ -11,17 +11,20 @@ const navItems = [
 export function LayoutShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen pb-10">
-      <header className="sticky top-0 z-20 border-b border-[#E9E9E9] bg-white/90 backdrop-blur-lg">
+      <header className="sticky top-0 z-20 border-b bg-white/90 backdrop-blur-lg" style={{ borderColor: "var(--border-default)" }}>
         <div className="app-container flex flex-wrap items-center justify-between gap-3 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-base font-semibold text-black no-underline">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#E9E9E9] bg-[#F6E8EC] text-sm text-black">
+          <Link href="/" className="inline-flex items-center gap-2 text-base font-semibold no-underline" style={{ color: "var(--text-primary)" }}>
+            <span
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border text-sm"
+              style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-soft)", color: "var(--accent-deep)" }}
+            >
               ♡
             </span>
             결결 리포트
           </Link>
-          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[#666666]">
+          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="rounded-full px-3 py-1.5 no-underline transition-colors hover:bg-[#F6E8EC] hover:text-black">
+              <Link key={item.href} href={item.href} className="nav-pill">
                 {item.label}
               </Link>
             ))}
