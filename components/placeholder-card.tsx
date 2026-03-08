@@ -10,8 +10,9 @@ export function PlaceholderCard({
   children?: ReactNode;
 }) {
   return (
-    <section className="surface-card">
-      <h2 className="title-lg">{title}</h2>
+    <section className="surface-card fade-up">
+      <p className="badge-soft">UP NEXT</p>
+      <h2 className="mt-3 title-lg">{title}</h2>
       <p className="mt-2 body-md">{description}</p>
       {children ? <div className="mt-4">{children}</div> : null}
     </section>
