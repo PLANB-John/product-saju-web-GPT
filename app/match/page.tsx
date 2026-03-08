@@ -37,15 +37,21 @@ function PersonFields({
   errors: MatchFormErrors;
   onChange: (next: PersonInput) => void;
 }) {
-  const toneStyle = tone === "soft" ? "border-[#E9E9E9] bg-[#F6E8EC]" : "border-[#E9E9E9] bg-white";
-
   const sectionHint =
     tone === "soft"
       ? "리포트 기준이 되는 사람 정보를 먼저 입력해 주세요."
       : "함께 해석할 상대 정보를 이어서 입력해 주세요.";
 
   return (
-    <fieldset className={`surface-card space-y-4 p-4 ${toneStyle} fade-up sm:p-5`}>
+    <fieldset className="surface-card space-y-4 p-4 fade-up sm:p-5"
+      style={
+        tone === "soft"
+          ? {
+              borderColor: "color-mix(in srgb, var(--accent-primary) 22%, var(--border-default))",
+              backgroundColor: "color-mix(in srgb, var(--accent-primary) 8%, white)",
+            }
+          : { borderColor: "var(--border-default)", backgroundColor: "var(--bg-card)" }
+      }>
       <legend className="w-full px-1">
         <div className="flex flex-wrap items-center gap-2 text-sm font-semibold tracking-tight text-black">
           <span className="text-base">{emoji}</span>
@@ -53,7 +59,7 @@ function PersonFields({
           <span className="badge-muted">{badge}</span>
         </div>
       </legend>
-      <p className="text-sm leading-6 text-[#666666]">{sectionHint}</p>
+      <p className="text-sm leading-6" style={{ color: "var(--text-secondary)" }}>{sectionHint}</p>
 
       <div className="space-y-2">
         <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-name`}>이름</label>
@@ -65,7 +71,7 @@ function PersonFields({
           placeholder="예: 홍길동"
           maxLength={20}
         />
-        {errors[`${fieldKey}.name`] ? <p className="text-xs leading-5 text-[#666666]">{errors[`${fieldKey}.name`]}</p> : null}
+        {errors[`${fieldKey}.name`] ? <p className="text-xs leading-5" style={{ color: "var(--text-secondary)" }}>{errors[`${fieldKey}.name`]}</p> : null}
       </div>
 
       <div className="space-y-2">
@@ -78,12 +84,12 @@ function PersonFields({
           onChange={(event) => onChange({ ...person, birthDate: event.target.value })}
         />
         {errors[`${fieldKey}.birthDate`] ? (
-          <p className="text-xs leading-5 text-[#666666]">{errors[`${fieldKey}.birthDate`]}</p>
+          <p className="text-xs leading-5" style={{ color: "var(--text-secondary)" }}>{errors[`${fieldKey}.birthDate`]}</p>
         ) : null}
       </div>
 
-      <div className="space-y-3 rounded-2xl border border-[#E9E9E9] bg-white/90 p-3.5">
-        <label className="flex min-h-[2.5rem] items-center gap-2 text-sm text-[#666666]" htmlFor={`${fieldKey}-birth-time-unknown`}>
+      <div className="space-y-3 rounded-2xl border bg-white/90 p-3.5" style={{ borderColor: "var(--border-default)" }}>
+        <label className="flex min-h-[2.5rem] items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }} htmlFor={`${fieldKey}-birth-time-unknown`}>
           <input
             id={`${fieldKey}-birth-time-unknown`}
             type="checkbox"
@@ -98,21 +104,21 @@ function PersonFields({
           />
           출생시간을 모르겠어요 (선택 입력)
         </label>
-        <p className="text-xs leading-5 text-[#999999]">출생시간은 선택 항목이에요. 모르면 체크하고 다음 단계로 넘어가도 괜찮아요.</p>
+        <p className="text-xs leading-5" style={{ color: "var(--text-muted)" }}>출생시간은 선택 항목이에요. 모르면 체크하고 다음 단계로 넘어가도 괜찮아요.</p>
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
           <input
             id={`${fieldKey}-birth-time`}
             type="time"
-            className="input-field disabled:bg-[#FCF8F7]"
+            className="input-field disabled:bg-[var(--bg-main)]"
             value={person.birthTime}
             onChange={(event) => onChange({ ...person, birthTime: event.target.value })}
             disabled={person.birthTimeUnknown}
           />
-          <p className="text-xs leading-5 text-[#999999]">알고 있다면 입력해 주세요. 관계 흐름을 조금 더 섬세하게 정리할 수 있어요.</p>
+          <p className="text-xs leading-5" style={{ color: "var(--text-muted)" }}>알고 있다면 입력해 주세요. 관계 흐름을 조금 더 섬세하게 정리할 수 있어요.</p>
           {errors[`${fieldKey}.birthTime`] ? (
-            <p className="text-xs leading-5 text-[#666666]">{errors[`${fieldKey}.birthTime`]}</p>
+            <p className="text-xs leading-5" style={{ color: "var(--text-secondary)" }}>{errors[`${fieldKey}.birthTime`]}</p>
           ) : null}
         </div>
       </div>
@@ -158,7 +164,7 @@ export default function MatchPage() {
         <p className="section-head">리포트 준비하기</p>
         <h1 className="title-xl">관계 리포트 정보 입력</h1>
         <p className="body-md max-w-2xl text-pretty">두 사람의 기본 정보를 차례대로 입력하면, 관계 해석 리포트를 바로 확인할 수 있어요.</p>
-        <p className="text-xs text-[#999999] sm:text-sm">입력은 1분 내외로 끝나요. 필요한 정보만 채우면 리포트 준비가 완료돼요.</p>
+        <p className="text-xs sm:text-sm" style={{ color: "var(--text-muted)" }}>입력은 1분 내외로 끝나요. 필요한 정보만 채우면 리포트 준비가 완료돼요.</p>
       </section>
 
       <form className="space-y-4 pb-28 sm:space-y-5 sm:pb-0" onSubmit={handleSubmit} noValidate>
@@ -184,13 +190,13 @@ export default function MatchPage() {
         />
 
         {hasError ? (
-          <p className="rounded-2xl border border-[#E9E9E9] bg-[#F6E8EC] px-3 py-2.5 text-sm text-[#666666]">
+          <p className="rounded-2xl border px-3 py-2.5 text-sm" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 24%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-primary) 10%, white)", color: "var(--text-secondary)" }}>
             아직 비어 있는 항목이 있어요. 표시된 정보만 채우면 리포트를 바로 확인할 수 있어요.
           </p>
         ) : null}
 
-        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-[#E9E9E9] bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 shadow-[0_-8px_18px_rgba(0,0,0,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:shadow-none">
-          <p className="mb-2 text-center text-xs text-[#999999] sm:hidden">입력을 마치면 아래 버튼으로 관계 리포트를 확인해요.</p>
+        <div className="fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 shadow-[0_-8px_18px_rgba(0,0,0,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:shadow-none" style={{ borderColor: "var(--border-default)" }}>
+          <p className="mb-2 text-center text-xs sm:hidden" style={{ color: "var(--text-muted)" }}>입력을 마치면 아래 버튼으로 관계 리포트를 확인해요.</p>
           <button type="submit" className="btn-primary w-full text-base sm:w-auto sm:text-sm disabled:cursor-not-allowed disabled:opacity-70" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
@@ -201,7 +207,7 @@ export default function MatchPage() {
               "관계 리포트 확인하기"
             )}
           </button>
-          {isSubmitting ? <p className="mt-2 text-center text-xs text-[#999999]">입력한 정보를 바탕으로 리포트를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
+          {isSubmitting ? <p className="mt-2 text-center text-xs" style={{ color: "var(--text-muted)" }}>입력한 정보를 바탕으로 리포트를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
         </div>
       </form>
     </div>
