@@ -33,6 +33,7 @@ function PersonFields({
   return (
     <fieldset className="surface-card space-y-4 p-4 sm:p-5">
       <legend className="px-1 text-sm font-semibold tracking-tight text-slate-900">{label}</legend>
+      <p className="text-sm text-slate-600">입력한 정보로 두 사람의 기본 관계 흐름을 비교합니다.</p>
 
       <div className="space-y-1.5">
         <label className="text-sm font-medium text-slate-700">이름</label>
@@ -73,7 +74,7 @@ function PersonFields({
               })
             }
           />
-          출생시간 모름
+          출생시간을 모르겠어요
         </label>
 
         <div className="space-y-1.5">
@@ -85,6 +86,9 @@ function PersonFields({
             onChange={(event) => onChange({ ...person, birthTime: event.target.value })}
             disabled={person.birthTimeUnknown}
           />
+          <p className="text-xs leading-5 text-slate-500">
+            출생시간을 알면 해석의 결을 조금 더 세밀하게 정리할 수 있어요.
+          </p>
           {errors[`${fieldKey}.birthTime`] ? (
             <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.birthTime`]}</p>
           ) : null}
@@ -123,8 +127,10 @@ export default function MatchPage() {
   return (
     <div className="section-gap">
       <section className="space-y-2">
-        <h1 className="title-xl">궁합 입력</h1>
-        <p className="body-md">두 사람의 기본 정보를 입력하면 결과 페이지로 이동합니다.</p>
+        <h1 className="title-xl">궁합 정보 입력</h1>
+        <p className="body-md">
+          두 사람의 기본 정보를 입력하면, 관계를 돌아볼 수 있는 참고용 리포트를 바로 확인할 수 있어요.
+        </p>
       </section>
 
       <form className="space-y-5" onSubmit={handleSubmit} noValidate>
@@ -145,7 +151,7 @@ export default function MatchPage() {
 
         {hasError ? (
           <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
-            입력값을 확인해 주세요.
+            아직 입력되지 않은 항목이 있어요. 표시된 내용을 확인해 주세요.
           </p>
         ) : null}
 

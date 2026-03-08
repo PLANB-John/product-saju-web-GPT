@@ -34,23 +34,23 @@ export default function ResultPage({
         </div>
       </header>
 
-      <ResultSection title="핵심 해석" description="관계를 이해할 때 먼저 볼 핵심 포인트입니다.">
+      <ResultSection title="핵심 해석" description="현재 관계를 이해할 때 먼저 확인하면 좋은 핵심 포인트입니다.">
         <ResultList items={result.coreInterpretations} />
       </ResultSection>
 
-      <ResultSection title="잘 맞는 점" description="현재 관계에서 강점으로 작동하는 부분입니다.">
+      <ResultSection title="잘 맞는 점" description="이미 잘 작동하고 있는 관계의 강점입니다.">
         <ResultList items={result.strengths} />
       </ResultSection>
 
-      <ResultSection title="조율이 필요한 점" description="갈등을 줄이기 위해 미리 살펴볼 포인트입니다.">
+      <ResultSection title="조율 포인트" description="갈등을 줄이고 균형을 맞추는 데 도움이 되는 지점입니다.">
         <ResultList items={result.adjustments} />
       </ResultSection>
 
-      <ResultSection title="관계 유지 팁" description="일상에서 바로 적용할 수 있는 짧은 제안입니다.">
+      <ResultSection title="관계 유지 팁" description="일상에서 부담 없이 실천할 수 있는 제안입니다.">
         <ResultList items={result.relationshipTips} />
       </ResultSection>
 
-      <ResultSection title="안내" description="해석을 활용할 때 함께 확인해 주세요.">
+      <ResultSection title="안내" description="아래 내용을 함께 참고하면 결과를 더 균형 있게 활용할 수 있어요.">
         <ul className="space-y-2 text-sm leading-7 text-slate-700 sm:text-base">
           <li>{result.notice.referenceOnly}</li>
           <li>{result.notice.variableByInput}</li>
@@ -58,7 +58,7 @@ export default function ResultPage({
       </ResultSection>
 
       <Link href="/match" className="btn-secondary w-full sm:w-auto">
-        다시 입력하기
+        정보 다시 입력하기
       </Link>
     </div>
   );
