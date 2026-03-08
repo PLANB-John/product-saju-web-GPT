@@ -177,7 +177,7 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
 
   return (
     <div className="section-gap pb-6">
-      <header className="surface-card overflow-hidden space-y-4 fade-up sm:space-y-5">
+      <header className="surface-card overflow-hidden space-y-4 fade-up sm:space-y-5" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 20%, var(--border-default))" }}>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="badge-soft">저장된 관계 리포트</p>
           <p className="max-w-full break-all text-xs font-medium tracking-wide" style={{ color: "var(--text-secondary)" }}>리포트 ID: {result.resultId}</p>
@@ -194,13 +194,13 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
               <p className="badge-soft max-w-full break-words">관계 리듬 유형 · {result.summary.relationType}</p>
               <p className="badge-muted">리포트 지표 {result.summary.score} / 100</p>
             </div>
-            <p className="rounded-2xl border px-3.5 py-3 text-sm font-medium leading-6 sm:px-4 sm:text-base" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 26%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-primary) 10%, white)", color: "var(--text-primary)" }}>
+            <p className="rounded-2xl border px-3.5 py-3 text-sm font-medium leading-6 sm:px-4 sm:text-base" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 30%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-primary) 9%, var(--bg-soft))", color: "var(--text-primary)" }}>
               {result.summary.oneLineSummary}
             </p>
           </div>
         </div>
 
-        <div className="surface-muted py-3">
+        <div className="surface-muted py-3" style={{ borderColor: "color-mix(in srgb, var(--accent-secondary) 20%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-secondary) 7%, var(--bg-soft))" }}>
           <p className="text-xs font-semibold tracking-wide" style={{ color: "var(--accent-primary)" }}>리포트 읽는 순서</p>
           <p className="mt-1 text-sm leading-6" style={{ color: "var(--text-secondary)" }}>
             요약 지표로 현재 흐름을 먼저 확인하고, 핵심 관찰 → 맞는 흐름 → 조율 메모 → 유지 가이드 순서로 읽으면 활용 포인트가 더 또렷해져요.
@@ -264,7 +264,7 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
       </section>
 
       <ResultSection title="읽기 안내" icon="i" description="아래 기준을 함께 보면 리포트를 더 균형 있게 활용할 수 있어요.">
-        <ul className="space-y-2.5 text-sm leading-7 text-black sm:space-y-3 sm:text-base">
+        <ul className="space-y-2.5 text-sm leading-7 sm:space-y-3 sm:text-base" style={{ color: "var(--text-primary)" }}>
           <li className="rounded-2xl border bg-white px-3.5 py-3 break-words sm:px-4" style={{ borderColor: "var(--border-default)" }}>{result.notice.referenceOnly}</li>
           <li className="rounded-2xl border bg-white px-3.5 py-3 break-words sm:px-4" style={{ borderColor: "var(--border-default)" }}>{result.notice.variableByInput}</li>
         </ul>

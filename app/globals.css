@@ -5,16 +5,16 @@
 :root {
   color-scheme: light;
   --bg-main: #fcf8f7;
-  --bg-soft: #f1ebe7;
+  --bg-soft: #f4ede9;
   --bg-card: #ffffff;
-  --text-primary: #1f1c1a;
-  --text-secondary: #5f5a56;
-  --text-muted: #8a847e;
-  --border-default: #e5e0dc;
-  --accent-primary: #8f6f63;
-  --accent-secondary: #7d8574;
-  --accent-deep: #4e433e;
-  --btn-primary: #2f2926;
+  --text-primary: #181614;
+  --text-secondary: #5f5954;
+  --text-muted: #918983;
+  --border-default: #e7dfda;
+  --accent-primary: #9a7667;
+  --accent-secondary: #808a7d;
+  --accent-deep: #4b403a;
+  --btn-primary: #2c2623;
   --btn-text: #ffffff;
 }
 
@@ -55,7 +55,7 @@ button {
   }
 
   .surface-card {
-    @apply rounded-[1.6rem] border p-4 shadow-[0_10px_28px_rgba(31,28,26,0.04)] backdrop-blur-sm sm:p-6;
+    @apply rounded-[1.6rem] border p-4 shadow-[0_14px_30px_rgba(24,22,20,0.045)] backdrop-blur-sm sm:p-6;
     background-color: var(--bg-card);
     border-color: var(--border-default);
   }
@@ -88,8 +88,8 @@ button {
 
   .badge-soft {
     @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold tracking-wide;
-    border-color: color-mix(in srgb, var(--accent-primary) 20%, var(--border-default));
-    background-color: color-mix(in srgb, var(--accent-primary) 12%, white);
+    border-color: color-mix(in srgb, var(--accent-primary) 24%, var(--border-default));
+    background-color: color-mix(in srgb, var(--accent-primary) 10%, white);
     color: var(--accent-deep);
   }
 
@@ -101,8 +101,8 @@ button {
 
   .badge-accent-subtle {
     @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium;
-    border-color: color-mix(in srgb, var(--accent-secondary) 36%, var(--border-default));
-    background-color: color-mix(in srgb, var(--accent-secondary) 12%, white);
+    border-color: color-mix(in srgb, var(--accent-secondary) 30%, var(--border-default));
+    background-color: color-mix(in srgb, var(--accent-secondary) 10%, white);
     color: var(--accent-deep);
   }
 
@@ -121,7 +121,7 @@ button {
 
   .btn-secondary:hover,
   .btn-secondary:active {
-    background-color: color-mix(in srgb, var(--accent-secondary) 8%, white);
+    background-color: color-mix(in srgb, var(--accent-secondary) 7%, white);
   }
 
   .input-field {
@@ -141,7 +141,7 @@ button {
 
   .section-head {
     @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold tracking-wide sm:text-sm;
-    background-color: color-mix(in srgb, var(--accent-primary) 12%, white);
+    background-color: color-mix(in srgb, var(--accent-primary) 10%, white);
     color: var(--accent-deep);
   }
 

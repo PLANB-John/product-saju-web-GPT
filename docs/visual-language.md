@@ -2,16 +2,16 @@
 
 ## 1) 관계도감 전용 팔레트
 - page background: `#FCF8F7`
-- soft surface: `#F1EBE7`
+- soft surface: `#F4EDE9`
 - card surface: `#FFFFFF`
-- border: `#E5E0DC`
-- primary text: `#1F1C1A`
-- secondary text: `#5F5A56`
-- muted text: `#8A847E`
-- primary accent: `#8F6F63` (로즈 브라운)
-- secondary accent: `#7D8574` (세이지 그레이)
-- deep accent: `#4E433E` (웜 코코아)
-- primary button: `#2F2926`
+- border: `#E7DFDA`
+- primary text: `#181614`
+- secondary text: `#5F5954`
+- muted text: `#918983`
+- primary accent: `#9A7667` (로즈 브라운)
+- secondary accent: `#808A7D` (세이지 그레이)
+- deep accent: `#4B403A` (웜 코코아)
+- primary button: `#2C2623`
 - button text: `#FFFFFF`
 
 ## 2) 적용 역할
@@ -21,7 +21,7 @@
 - accent는 배지, 섹션 헤더, 얇은 구분선, 요약 카드 강조, 숫자 마커에만 제한 사용한다.
 - 결과 화면의 강점/조율/팁 섹션은 색으로 분리하지 않고 구조와 타이포로 구분한다.
 
-## 3) 이번 정비에서 제거/축소한 인상
-- 기존 `#F6E8EC` 단일 핑크톤 중심 강조를 축소하고, 웜 뉴트럴 + 세이지 계열로 재정비했다.
-- 본문 전역의 직접 색 지정(검정/회색 하드코딩)을 줄이고 토큰 기반 사용으로 통일했다.
-- 강조 색의 사용 범위를 CTA 주변/요약 포인트로 제한해 과한 다채색 인상을 방지했다.
+## 3) 이번 정비에서 조정한 포인트
+- 홈 hero와 결과 요약 카드에서만 accent 농도를 소폭 올려 첫인상 밀도를 보강했다.
+- /match 화면은 두 사람 카드 배경 분리를 줄이고 라벨/보더 강조로만 차이를 두어 차분함을 유지했다.
+- 하드코딩된 `text-black` 사용을 줄이고 토큰(`--text-primary`) 중심으로 통일했다.

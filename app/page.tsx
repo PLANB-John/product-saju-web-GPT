@@ -11,13 +11,13 @@ const upcomingTracks = ["함께 읽기 뷰", "메모 레이어", "대화 후속 
 export default function HomePage() {
   return (
     <div className="space-y-6 sm:space-y-9">
-      <section className="rounded-[1.75rem] border bg-white p-5 shadow-[0_14px_34px_rgba(31,28,26,0.05)] sm:p-8" style={{ borderColor: "var(--border-default)" }}>
+      <section className="rounded-[1.75rem] border bg-white p-5 shadow-[0_18px_38px_rgba(24,22,20,0.06)] sm:p-8" style={{ borderColor: "var(--border-default)" }}>
         <div className="mx-auto max-w-3xl space-y-6 sm:space-y-7">
-          <div className="space-y-3">
+          <div className="space-y-3.5">
             <p className="badge-soft px-3.5 py-1 text-[11px] uppercase tracking-[0.14em]">Relationship Report Archive</p>
             <div className="space-y-2">
-              <p className="text-sm font-semibold tracking-tight sm:text-base" style={{ color: "var(--accent-deep)" }}>
-                관계도감
+              <p className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] sm:text-xs" style={{ color: "var(--accent-deep)", borderColor: "color-mix(in srgb, var(--accent-secondary) 26%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-secondary) 10%, white)" }}>
+                관계도감 아카이브
               </p>
               <h1 className="text-[1.7rem] font-semibold leading-[1.25] tracking-tight sm:text-[2.35rem]" style={{ color: "var(--text-primary)" }}>
                 관계를 가볍게 시작해도,
@@ -30,7 +30,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border p-4 sm:p-5" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 24%, var(--border-default))", backgroundColor: "var(--bg-soft)" }}>
+          <div className="rounded-2xl border p-4 sm:p-5" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 28%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-primary) 7%, var(--bg-soft))" }}>
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--accent-primary)" }}>
               Report Note
             </p>
@@ -41,7 +41,7 @@ export default function HomePage() {
 
           <div className="grid gap-2.5 sm:grid-cols-3 sm:gap-3">
             {archivePoints.map((point) => (
-              <div key={point.label} className="rounded-2xl border bg-white p-3.5" style={{ borderColor: "var(--border-default)" }}>
+              <div key={point.label} className="rounded-2xl border bg-white p-3.5" style={{ borderColor: "color-mix(in srgb, var(--accent-secondary) 14%, var(--border-default))" }}>
                 <p className="text-xs font-medium" style={{ color: "var(--text-secondary)" }}>
                   {point.label}
                 </p>
@@ -52,7 +52,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="space-y-3 border-t pt-5 sm:pt-6" style={{ borderColor: "var(--border-default)" }}>
+          <div className="space-y-3.5 border-t pt-5 sm:pt-6" style={{ borderColor: "var(--border-default)" }}>
             <p className="text-sm leading-6" style={{ color: "var(--text-secondary)" }}>
               지금 필요한 정보만 입력하고, 관계 리포트를 바로 받아보세요.
             </p>
@@ -76,7 +76,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-[1.5rem] border bg-white p-5 sm:p-6" style={{ borderColor: "var(--border-default)" }}>
+      <section className="rounded-[1.5rem] border bg-white p-5 shadow-[0_10px_24px_rgba(24,22,20,0.04)] sm:p-6" style={{ borderColor: "var(--border-default)" }}>
         <div className="space-y-4">
           <div className="space-y-2">
             <p className="badge-accent-subtle px-3 py-1 text-[11px] uppercase tracking-[0.12em]">Up Next</p>
@@ -95,7 +95,7 @@ export default function HomePage() {
                 className="rounded-xl border px-3.5 py-3 text-sm font-medium"
                 style={{
                   borderColor: "color-mix(in srgb, var(--accent-secondary) 30%, var(--border-default))",
-                  backgroundColor: "color-mix(in srgb, var(--accent-secondary) 10%, white)",
+                  backgroundColor: "color-mix(in srgb, var(--accent-secondary) 8%, white)",
                   color: "var(--accent-deep)",
                 }}
               >

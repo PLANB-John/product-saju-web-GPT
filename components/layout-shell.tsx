@@ -11,12 +11,12 @@ const navItems = [
 export function LayoutShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen pb-10">
-      <header className="sticky top-0 z-20 border-b bg-white/90 backdrop-blur-lg" style={{ borderColor: "var(--border-default)" }}>
+      <header className="sticky top-0 z-20 border-b bg-white/92 backdrop-blur-lg" style={{ borderColor: "var(--border-default)" }}>
         <div className="app-container flex flex-wrap items-center justify-between gap-3 py-4">
           <Link href="/" className="inline-flex items-center gap-2 text-base font-semibold no-underline" style={{ color: "var(--text-primary)" }}>
             <span
               className="inline-flex h-8 w-8 items-center justify-center rounded-full border text-sm"
-              style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-soft)", color: "var(--accent-deep)" }}
+              style={{ borderColor: "var(--border-default)", backgroundColor: "color-mix(in srgb, var(--accent-primary) 8%, var(--bg-soft))", color: "var(--accent-deep)" }}
             >
               ♡
             </span>
