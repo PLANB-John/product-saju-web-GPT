@@ -37,3 +37,7 @@ npm run start
 - `/policy/notice` : 서비스 안내 초안
 - `/room` : room 기능 준비중
 - `/join/[roomCode]` : room 참여 기능 준비중
+
+## 배포 주의사항
+- Vercel 배포 시 Next.js 설정 파일은 `next.config.ts`를 지원하지 않습니다.
+- 설정 파일은 `next.config.mjs`(또는 `next.config.js`) 형식을 사용하세요.
