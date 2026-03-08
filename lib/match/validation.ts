@@ -30,9 +30,21 @@ export function validateMatchForm(data: MatchFormData): MatchFormErrors {
   return errors;
 }
 
-export function buildResultId(data: MatchFormData) {
-  const left = data.personA.name.trim().slice(0, 6) || "a";
-  const right = data.personB.name.trim().slice(0, 6) || "b";
+function toSlug(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "user";
+  }
 
-  return `${left}-${right}-${Date.now()}`;
+  return encodeURIComponent(trimmed.slice(0, 6).toLowerCase());
+}
+
+export function buildResultId(data: MatchFormData) {
+  const left = toSlug(data.personA.name);
+  const right = toSlug(data.personB.name);
+  const uniqueId = typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID().slice(0, 8)
+    : Date.now().toString(36);
+
+  return `${left}-${right}-${uniqueId}`;
 }

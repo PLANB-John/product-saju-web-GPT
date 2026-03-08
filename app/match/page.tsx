@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { validateMatchForm, buildResultId } from "@/lib/match/validation";
+import { createAndStoreCompatibilityResult } from "@/lib/compatibility/result-service";
 import type { MatchFormData, MatchFormErrors, PersonInput } from "@/types/match";
 
 const initialPerson: PersonInput = {
@@ -124,12 +125,9 @@ export default function MatchPage() {
     }
 
     const resultId = buildResultId(formData);
-    const query = new URLSearchParams({
-      aName: formData.personA.name,
-      bName: formData.personB.name,
-    });
+    createAndStoreCompatibilityResult(resultId, formData);
 
-    router.push(`/result/${resultId}?${query.toString()}`);
+    router.push(`/result/${resultId}`);
   };
 
   return (
