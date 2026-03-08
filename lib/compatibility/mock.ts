@@ -61,6 +61,10 @@ function pickTriple<T>(items: readonly T[], hash: number, offset: number): [T, T
   ];
 }
 
+function toStringList(items: readonly (string | undefined)[]): string[] {
+  return items.filter((item): item is string => typeof item === "string");
+}
+
 export function getMockCompatibilityResult(seed: CompatibilityResultSeed): CompatibilityResult {
   const personAName = seed.personAName?.trim() || "사용자 A";
   const personBName = seed.personBName?.trim() || "사용자 B";
@@ -76,10 +80,10 @@ export function getMockCompatibilityResult(seed: CompatibilityResultSeed): Compa
       relationType: pickByHash(RELATION_TYPES, hash, 0),
       oneLineSummary: pickByHash(ONE_LINE_SUMMARIES, hash, 3),
     },
-    coreInterpretations: pickTriple(CORE_INTERPRETATIONS, hash, 5),
-    strengths: pickTriple(STRENGTHS, hash, 7),
-    adjustments: pickTriple(ADJUSTMENTS, hash, 11),
-    relationshipTips: pickTriple(RELATIONSHIP_TIPS, hash, 13),
+    coreInterpretations: toStringList(pickTriple(CORE_INTERPRETATIONS, hash, 5)),
+    strengths: toStringList(pickTriple(STRENGTHS, hash, 7)),
+    adjustments: toStringList(pickTriple(ADJUSTMENTS, hash, 11)),
+    relationshipTips: toStringList(pickTriple(RELATIONSHIP_TIPS, hash, 13)),
     notice: {
       referenceOnly: "이 결과는 관계를 돌아보기 위한 참고용 요약 리포트입니다.",
       variableByInput: "입력한 생년월일·출생시간 정보가 달라지면 결과도 달라질 수 있습니다.",
