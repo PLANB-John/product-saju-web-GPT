@@ -15,10 +15,10 @@ export type CompatibilitySummary = {
 export type CompatibilityResult = {
   resultId: string;
   summary: CompatibilitySummary;
-  coreInterpretations: [string, string, string];
-  strengths: [string, string, string?];
-  adjustments: [string, string, string?];
-  relationshipTips: [string, string, string?];
+  coreInterpretations: readonly string[];
+  strengths: readonly string[];
+  adjustments: readonly string[];
+  relationshipTips: readonly string[];
   notice: {
     referenceOnly: string;
     variableByInput: string;
