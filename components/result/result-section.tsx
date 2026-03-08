@@ -11,17 +11,13 @@ type ResultSectionProps = {
 export function ResultSection({ title, description, icon, toneLabel, children }: ResultSectionProps) {
   return (
     <section className="surface-card space-y-3.5 fade-up sm:space-y-4">
-      <div className="space-y-2">
+      <div className="section-title-wrap">
         <div className="flex flex-wrap items-center gap-2">
           <p className="section-head">
-            <span>{icon ?? "•"}</span>
+            <span className="text-[11px]">{icon ?? "●"}</span>
             {title}
           </p>
-          {toneLabel ? (
-            <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600">
-              {toneLabel}
-            </span>
-          ) : null}
+          {toneLabel ? <span className="badge-muted">{toneLabel}</span> : null}
         </div>
         {description ? <p className="body-md text-pretty">{description}</p> : null}
       </div>

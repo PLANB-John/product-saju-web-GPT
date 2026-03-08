@@ -7,18 +7,19 @@
 }
 
 body {
-  @apply bg-rose-50/60 text-slate-900 antialiased;
-  background-image: radial-gradient(circle at top right, rgba(159, 122, 234, 0.14), transparent 40%),
-    radial-gradient(circle at top left, rgba(236, 72, 153, 0.1), transparent 35%);
+  @apply bg-[#fff8f4] text-slate-900 antialiased;
+  background-image: radial-gradient(circle at 8% 0%, rgba(251, 146, 60, 0.14), transparent 34%),
+    radial-gradient(circle at 96% 12%, rgba(244, 114, 182, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 248, 244, 0.92));
 }
 
 a {
-  @apply text-violet-700 underline-offset-2 transition-colors hover:text-violet-800 hover:underline;
+  @apply text-[#bf4c2f] underline-offset-2 transition-colors hover:text-[#9f3b22] hover:underline;
 }
 
 input,
 button {
-  @apply focus:outline-none focus:ring-2 focus:ring-violet-300 focus:ring-offset-2 focus:ring-offset-white;
+  @apply focus:outline-none focus:ring-2 focus:ring-[#f59e86] focus:ring-offset-2 focus:ring-offset-white;
 }
 
 @layer components {
@@ -31,43 +32,55 @@ button {
   }
 
   .surface-card {
-    @apply rounded-3xl border border-violet-100/80 bg-white/90 p-4 shadow-[0_8px_30px_rgba(76,29,149,0.08)] backdrop-blur-sm sm:p-6;
+    @apply rounded-[1.6rem] border border-[#f3d8cb] bg-white p-4 shadow-[0_14px_34px_rgba(174,89,56,0.09)] backdrop-blur-sm sm:p-6;
+  }
+
+  .surface-muted {
+    @apply rounded-2xl border border-[#f3e3d8] bg-[#fff9f6] p-4;
   }
 
   .accent-line {
-    @apply h-px w-full bg-gradient-to-r from-fuchsia-200 via-violet-200 to-transparent;
+    @apply h-px w-full bg-gradient-to-r from-[#f59e86] via-[#f8c6a5] to-transparent;
   }
 
   .title-xl {
-    @apply text-[1.65rem] leading-tight font-semibold tracking-tight text-slate-900 sm:text-3xl;
+    @apply text-[1.65rem] leading-tight font-semibold tracking-tight text-[#241f1d] sm:text-3xl;
   }
 
   .title-lg {
-    @apply text-lg font-semibold tracking-tight text-slate-900 sm:text-xl;
+    @apply text-lg font-semibold tracking-tight text-[#241f1d] sm:text-xl;
   }
 
   .body-md {
-    @apply text-sm leading-6 text-slate-600 sm:text-base sm:leading-7;
+    @apply text-sm leading-6 text-[#5f5752] sm:text-base sm:leading-7;
   }
 
   .badge-soft {
-    @apply inline-flex items-center rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-medium tracking-wide text-violet-700;
+    @apply inline-flex items-center rounded-full border border-[#f5b8a4] bg-[#fff0e8] px-3 py-1 text-xs font-semibold tracking-wide text-[#ad4528];
+  }
+
+  .badge-muted {
+    @apply inline-flex items-center rounded-full border border-[#e8dbd3] bg-[#f8f4f1] px-2.5 py-1 text-xs font-medium text-[#746b66];
   }
 
   .btn-primary {
-    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-700 to-fuchsia-600 px-5 py-3 text-sm font-semibold text-white no-underline shadow-[0_10px_24px_rgba(109,40,217,0.32)] transition-all hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0 active:brightness-95 disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-70;
+    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#c95a37] via-[#d96c43] to-[#ea8354] px-5 py-3 text-sm font-semibold text-white no-underline shadow-[0_12px_26px_rgba(191,76,47,0.3)] transition-all hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0 active:brightness-95 disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-70;
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-[2.75rem] items-center justify-center rounded-2xl border border-violet-200 bg-white px-4 py-2.5 text-sm font-medium text-violet-800 no-underline transition-colors hover:bg-violet-50 active:bg-violet-100 disabled:pointer-events-none disabled:opacity-60;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center rounded-2xl border border-[#ebc8b9] bg-white px-4 py-2.5 text-sm font-medium text-[#8e4228] no-underline transition-colors hover:bg-[#fff4ef] active:bg-[#ffece2] disabled:pointer-events-none disabled:opacity-60;
   }
 
   .input-field {
-    @apply w-full min-h-[2.875rem] rounded-2xl border border-violet-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-violet-400;
+    @apply w-full min-h-[2.875rem] rounded-2xl border border-[#ebc8b9] bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-[#b2a7a1] transition-colors focus:border-[#de815e];
   }
 
   .section-head {
-    @apply flex items-center gap-2 text-sm font-semibold text-violet-700;
+    @apply inline-flex items-center gap-2 rounded-full bg-[#fff1e8] px-3 py-1 text-xs font-semibold tracking-wide text-[#b54a2a] sm:text-sm;
+  }
+
+  .section-title-wrap {
+    @apply space-y-2;
   }
 
   .fade-up {
