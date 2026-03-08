@@ -11,14 +11,17 @@ const navItems = [
 export function LayoutShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen pb-10">
-      <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-violet-100 bg-white/85 backdrop-blur-lg">
         <div className="app-container flex flex-wrap items-center justify-between gap-3 py-4">
-          <Link href="/" className="text-base font-semibold text-slate-900 no-underline">
-            사주 궁합 MVP
+          <Link href="/" className="inline-flex items-center gap-2 text-base font-semibold text-slate-900 no-underline">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-fuchsia-500 text-sm text-white">
+              ♡
+            </span>
+            결결 리포트
           </Link>
-          <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} href={item.href} className="rounded-full px-3 py-1.5 no-underline hover:bg-violet-50">
                 {item.label}
               </Link>
             ))}
