@@ -10,7 +10,7 @@ type ResultSectionProps = {
 
 export function ResultSection({ title, description, icon, toneLabel, children }: ResultSectionProps) {
   return (
-    <section className="surface-card space-y-4 fade-up">
+    <section className="surface-card space-y-3.5 fade-up sm:space-y-4">
       <div className="space-y-2">
         <div className="flex flex-wrap items-center gap-2">
           <p className="section-head">
@@ -23,7 +23,7 @@ export function ResultSection({ title, description, icon, toneLabel, children }:
             </span>
           ) : null}
         </div>
-        {description ? <p className="body-md">{description}</p> : null}
+        {description ? <p className="body-md text-pretty">{description}</p> : null}
       </div>
       <div className="accent-line" />
       {children}
