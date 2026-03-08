@@ -43,26 +43,42 @@ function PersonFields({
       : "함께 해석할 상대 정보를 이어서 입력해 주세요.";
 
   return (
-    <fieldset className="surface-card space-y-4 p-4 fade-up sm:p-5"
-      style={
-        tone === "soft"
-          ? {
-              borderColor: "color-mix(in srgb, var(--accent-primary) 22%, var(--border-default))",
-              backgroundColor: "color-mix(in srgb, var(--accent-primary) 8%, white)",
-            }
-          : { borderColor: "var(--border-default)", backgroundColor: "var(--bg-card)" }
-      }>
+    <fieldset
+      className="surface-card space-y-4 p-4 fade-up sm:p-5"
+      style={{
+        borderColor:
+          tone === "soft"
+            ? "color-mix(in srgb, var(--accent-primary) 18%, var(--border-default))"
+            : "color-mix(in srgb, var(--accent-secondary) 14%, var(--border-default))",
+        backgroundColor: "var(--bg-card)",
+      }}
+    >
       <legend className="w-full px-1">
-        <div className="flex flex-wrap items-center gap-2 text-sm font-semibold tracking-tight text-black">
+        <div className="flex flex-wrap items-center gap-2 text-sm font-semibold tracking-tight" style={{ color: "var(--text-primary)" }}>
           <span className="text-base">{emoji}</span>
           <span>{label}</span>
-          <span className="badge-muted">{badge}</span>
+          <span
+            className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-medium"
+            style={{
+              borderColor:
+                tone === "soft"
+                  ? "color-mix(in srgb, var(--accent-primary) 24%, var(--border-default))"
+                  : "color-mix(in srgb, var(--accent-secondary) 24%, var(--border-default))",
+              backgroundColor:
+                tone === "soft"
+                  ? "color-mix(in srgb, var(--accent-primary) 8%, white)"
+                  : "color-mix(in srgb, var(--accent-secondary) 8%, white)",
+              color: "var(--accent-deep)",
+            }}
+          >
+            {badge}
+          </span>
         </div>
       </legend>
       <p className="text-sm leading-6" style={{ color: "var(--text-secondary)" }}>{sectionHint}</p>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-name`}>이름</label>
+        <label className="text-sm font-medium" style={{ color: "var(--text-primary)" }} htmlFor={`${fieldKey}-name`}>이름</label>
         <input
           id={`${fieldKey}-name`}
           className="input-field"
@@ -75,7 +91,7 @@ function PersonFields({
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-birth-date`}>생년월일</label>
+        <label className="text-sm font-medium" style={{ color: "var(--text-primary)" }} htmlFor={`${fieldKey}-birth-date`}>생년월일</label>
         <input
           id={`${fieldKey}-birth-date`}
           type="date"
@@ -88,7 +104,7 @@ function PersonFields({
         ) : null}
       </div>
 
-      <div className="space-y-3 rounded-2xl border bg-white/90 p-3.5" style={{ borderColor: "var(--border-default)" }}>
+      <div className="space-y-3 rounded-2xl border bg-white p-3.5" style={{ borderColor: "var(--border-default)" }}>
         <label className="flex min-h-[2.5rem] items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }} htmlFor={`${fieldKey}-birth-time-unknown`}>
           <input
             id={`${fieldKey}-birth-time-unknown`}
@@ -107,7 +123,7 @@ function PersonFields({
         <p className="text-xs leading-5" style={{ color: "var(--text-muted)" }}>출생시간은 선택 항목이에요. 모르면 체크하고 다음 단계로 넘어가도 괜찮아요.</p>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
+          <label className="text-sm font-medium" style={{ color: "var(--text-primary)" }} htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
           <input
             id={`${fieldKey}-birth-time`}
             type="time"
@@ -190,7 +206,7 @@ export default function MatchPage() {
         />
 
         {hasError ? (
-          <p className="rounded-2xl border px-3 py-2.5 text-sm" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 24%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-primary) 10%, white)", color: "var(--text-secondary)" }}>
+          <p className="rounded-2xl border px-3 py-2.5 text-sm" style={{ borderColor: "color-mix(in srgb, var(--accent-primary) 28%, var(--border-default))", backgroundColor: "color-mix(in srgb, var(--accent-primary) 8%, white)", color: "var(--text-secondary)" }}>
             아직 비어 있는 항목이 있어요. 표시된 정보만 채우면 리포트를 바로 확인할 수 있어요.
           </p>
         ) : null}
