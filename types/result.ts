@@ -1,8 +1,8 @@
 export type CompatibilityRelationType =
-  | "안정형"
-  | "성장형"
-  | "균형형"
-  | "리듬조율형";
+  | "안정 동행형"
+  | "상호 확장형"
+  | "균형 설계형"
+  | "리듬 조정형";
 
 export type CompatibilitySummary = {
   personAName: string;
