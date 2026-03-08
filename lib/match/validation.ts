@@ -13,11 +13,11 @@ function validatePerson(
   }
 
   if (!DATE_REGEX.test(person.birthDate)) {
-    errors[`${prefix}.birthDate`] = "생년월일 형식(YYYY-MM-DD)을 확인해 주세요.";
+    errors[`${prefix}.birthDate`] = "생년월일을 다시 확인해 주세요.";
   }
 
   if (!person.birthTimeUnknown && !TIME_REGEX.test(person.birthTime)) {
-    errors[`${prefix}.birthTime`] = "출생시간 형식(HH:mm)을 확인해 주세요.";
+    errors[`${prefix}.birthTime`] = "시간을 모르시면 '출생시간을 모르겠어요'를 선택해 주세요.";
   }
 }
 
