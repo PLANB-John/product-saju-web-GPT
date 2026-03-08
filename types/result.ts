@@ -30,3 +30,7 @@ export type CompatibilityResultSeed = {
   personAName?: string;
   personBName?: string;
 };
+
+export type StoredCompatibilityResult = CompatibilityResult & {
+  createdAt: string;
+};
