@@ -10,9 +10,9 @@ export function PlaceholderCard({
   children?: ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 className="text-lg font-semibold">{title}</h2>
-      <p className="mt-2 text-sm text-slate-600">{description}</p>
+    <section className="surface-card">
+      <h2 className="title-lg">{title}</h2>
+      <p className="mt-2 body-md">{description}</p>
       {children ? <div className="mt-4">{children}</div> : null}
     </section>
   );
