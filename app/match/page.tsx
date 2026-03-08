@@ -124,11 +124,16 @@ export default function MatchPage() {
   const router = useRouter();
   const [formData, setFormData] = useState<MatchFormData>(initialForm);
   const [errors, setErrors] = useState<MatchFormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const hasError = useMemo(() => Object.keys(errors).length > 0, [errors]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
 
     const nextErrors = validateMatchForm(formData);
     setErrors(nextErrors);
@@ -137,8 +142,12 @@ export default function MatchPage() {
       return;
     }
 
+    setIsSubmitting(true);
+
     const resultId = buildResultId(formData);
     createAndStoreCompatibilityResult(resultId, formData);
+
+    await new Promise((resolve) => window.setTimeout(resolve, 250));
 
     router.push(`/result/${resultId}`);
   };
@@ -182,9 +191,17 @@ export default function MatchPage() {
 
         <div className="fixed inset-x-0 bottom-0 z-20 border-t border-violet-100/80 bg-white/95 p-4 shadow-[0_-10px_24px_rgba(15,23,42,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
           <p className="mb-2 text-center text-xs text-slate-500 sm:hidden">입력을 마치면 아래 버튼으로 바로 결과를 확인해요.</p>
-          <button type="submit" className="btn-primary w-full sm:w-auto">
-            💫 궁합 리포트 확인하기
+          <button type="submit" className="btn-primary w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-70" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/50 border-t-white" aria-hidden />
+                리포트 만드는 중...
+              </>
+            ) : (
+              "💫 궁합 리포트 확인하기"
+            )}
           </button>
+          {isSubmitting ? <p className="mt-2 text-center text-xs text-slate-500">입력한 정보를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
         </div>
       </form>
     </div>
