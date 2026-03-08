@@ -11,17 +11,17 @@ const navItems = [
 export function LayoutShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen pb-10">
-      <header className="sticky top-0 z-20 border-b border-[#f1d6c9] bg-white/85 backdrop-blur-lg">
+      <header className="sticky top-0 z-20 border-b border-[#E9E9E9] bg-white/90 backdrop-blur-lg">
         <div className="app-container flex flex-wrap items-center justify-between gap-3 py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-base font-semibold text-[#241f1d] no-underline">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#ca5b39] to-[#ef9365] text-sm text-white">
+          <Link href="/" className="inline-flex items-center gap-2 text-base font-semibold text-black no-underline">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#E9E9E9] bg-[#F6E8EC] text-sm text-black">
               ♡
             </span>
             결결 리포트
           </Link>
-          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[#5f5752]">
+          <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[#666666]">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="rounded-full px-3 py-1.5 no-underline transition-colors hover:bg-[#fff1e8] hover:text-[#9b4025]">
+              <Link key={item.href} href={item.href} className="rounded-full px-3 py-1.5 no-underline transition-colors hover:bg-[#F6E8EC] hover:text-black">
                 {item.label}
               </Link>
             ))}
