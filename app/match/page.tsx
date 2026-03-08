@@ -31,35 +31,32 @@ function PersonFields({
   label: string;
   emoji: string;
   badge: string;
-  tone: "violet" | "rose";
+  tone: "soft" | "base";
   fieldKey: "personA" | "personB";
   person: PersonInput;
   errors: MatchFormErrors;
   onChange: (next: PersonInput) => void;
 }) {
-  const toneStyle =
-    tone === "violet"
-      ? "border-[#f0ccb8] bg-[#fff6f1]"
-      : "border-[#f2d5c8] bg-[#fff8f4]";
+  const toneStyle = tone === "soft" ? "border-[#E9E9E9] bg-[#F6E8EC]" : "border-[#E9E9E9] bg-white";
 
   const sectionHint =
-    tone === "violet"
+    tone === "soft"
       ? "리포트 기준이 되는 사람 정보를 먼저 입력해 주세요."
       : "함께 해석할 상대 정보를 이어서 입력해 주세요.";
 
   return (
     <fieldset className={`surface-card space-y-4 p-4 ${toneStyle} fade-up sm:p-5`}>
       <legend className="w-full px-1">
-        <div className="flex flex-wrap items-center gap-2 text-sm font-semibold tracking-tight text-[#312a27]">
+        <div className="flex flex-wrap items-center gap-2 text-sm font-semibold tracking-tight text-black">
           <span className="text-base">{emoji}</span>
           <span>{label}</span>
           <span className="badge-muted">{badge}</span>
         </div>
       </legend>
-      <p className="text-sm leading-6 text-[#655c57]">{sectionHint}</p>
+      <p className="text-sm leading-6 text-[#666666]">{sectionHint}</p>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-[#4a423f]" htmlFor={`${fieldKey}-name`}>이름</label>
+        <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-name`}>이름</label>
         <input
           id={`${fieldKey}-name`}
           className="input-field"
@@ -68,11 +65,11 @@ function PersonFields({
           placeholder="예: 홍길동"
           maxLength={20}
         />
-        {errors[`${fieldKey}.name`] ? <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.name`]}</p> : null}
+        {errors[`${fieldKey}.name`] ? <p className="text-xs leading-5 text-[#666666]">{errors[`${fieldKey}.name`]}</p> : null}
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-[#4a423f]" htmlFor={`${fieldKey}-birth-date`}>생년월일</label>
+        <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-birth-date`}>생년월일</label>
         <input
           id={`${fieldKey}-birth-date`}
           type="date"
@@ -81,12 +78,12 @@ function PersonFields({
           onChange={(event) => onChange({ ...person, birthDate: event.target.value })}
         />
         {errors[`${fieldKey}.birthDate`] ? (
-          <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.birthDate`]}</p>
+          <p className="text-xs leading-5 text-[#666666]">{errors[`${fieldKey}.birthDate`]}</p>
         ) : null}
       </div>
 
-      <div className="space-y-3 rounded-2xl border border-[#efdccf] bg-white/75 p-3.5">
-        <label className="flex min-h-[2.5rem] items-center gap-2 text-sm text-[#5b524d]" htmlFor={`${fieldKey}-birth-time-unknown`}>
+      <div className="space-y-3 rounded-2xl border border-[#E9E9E9] bg-white/90 p-3.5">
+        <label className="flex min-h-[2.5rem] items-center gap-2 text-sm text-[#666666]" htmlFor={`${fieldKey}-birth-time-unknown`}>
           <input
             id={`${fieldKey}-birth-time-unknown`}
             type="checkbox"
@@ -101,21 +98,21 @@ function PersonFields({
           />
           출생시간을 모르겠어요 (선택 입력)
         </label>
-        <p className="text-xs leading-5 text-[#7a706a]">출생시간은 선택 항목이에요. 모르면 체크하고 다음 단계로 넘어가도 괜찮아요.</p>
+        <p className="text-xs leading-5 text-[#999999]">출생시간은 선택 항목이에요. 모르면 체크하고 다음 단계로 넘어가도 괜찮아요.</p>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-[#4a423f]" htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
+          <label className="text-sm font-medium text-black" htmlFor={`${fieldKey}-birth-time`}>출생시간</label>
           <input
             id={`${fieldKey}-birth-time`}
             type="time"
-            className="input-field disabled:bg-slate-100"
+            className="input-field disabled:bg-[#FCF8F7]"
             value={person.birthTime}
             onChange={(event) => onChange({ ...person, birthTime: event.target.value })}
             disabled={person.birthTimeUnknown}
           />
-          <p className="text-xs leading-5 text-[#7a706a]">알고 있다면 입력해 주세요. 관계 흐름을 조금 더 섬세하게 정리할 수 있어요.</p>
+          <p className="text-xs leading-5 text-[#999999]">알고 있다면 입력해 주세요. 관계 흐름을 조금 더 섬세하게 정리할 수 있어요.</p>
           {errors[`${fieldKey}.birthTime`] ? (
-            <p className="text-xs leading-5 text-rose-600">{errors[`${fieldKey}.birthTime`]}</p>
+            <p className="text-xs leading-5 text-[#666666]">{errors[`${fieldKey}.birthTime`]}</p>
           ) : null}
         </div>
       </div>
@@ -161,7 +158,7 @@ export default function MatchPage() {
         <p className="section-head">리포트 준비하기</p>
         <h1 className="title-xl">관계 리포트 정보 입력</h1>
         <p className="body-md max-w-2xl text-pretty">두 사람의 기본 정보를 차례대로 입력하면, 관계 해석 리포트를 바로 확인할 수 있어요.</p>
-        <p className="text-xs text-[#7a706a] sm:text-sm">입력은 1분 내외로 끝나요. 필요한 정보만 채우면 리포트 준비가 완료돼요.</p>
+        <p className="text-xs text-[#999999] sm:text-sm">입력은 1분 내외로 끝나요. 필요한 정보만 채우면 리포트 준비가 완료돼요.</p>
       </section>
 
       <form className="space-y-4 pb-28 sm:space-y-5 sm:pb-0" onSubmit={handleSubmit} noValidate>
@@ -169,7 +166,7 @@ export default function MatchPage() {
           label="사람 1"
           emoji="01"
           badge="기준 정보"
-          tone="violet"
+          tone="soft"
           fieldKey="personA"
           person={formData.personA}
           errors={errors}
@@ -179,7 +176,7 @@ export default function MatchPage() {
           label="사람 2"
           emoji="02"
           badge="비교 정보"
-          tone="rose"
+          tone="base"
           fieldKey="personB"
           person={formData.personB}
           errors={errors}
@@ -187,13 +184,13 @@ export default function MatchPage() {
         />
 
         {hasError ? (
-          <p className="rounded-2xl border border-rose-200/80 bg-rose-50/80 px-3 py-2.5 text-sm text-rose-700">
+          <p className="rounded-2xl border border-[#E9E9E9] bg-[#F6E8EC] px-3 py-2.5 text-sm text-[#666666]">
             아직 비어 있는 항목이 있어요. 표시된 정보만 채우면 리포트를 바로 확인할 수 있어요.
           </p>
         ) : null}
 
-        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-[#ebc8b9] bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 shadow-[0_-10px_24px_rgba(89,52,37,0.1)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:shadow-none">
-          <p className="mb-2 text-center text-xs text-[#7b716a] sm:hidden">입력을 마치면 아래 버튼으로 관계 리포트를 확인해요.</p>
+        <div className="fixed inset-x-0 bottom-0 z-20 border-t border-[#E9E9E9] bg-white/95 px-4 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] pt-3 shadow-[0_-8px_18px_rgba(0,0,0,0.08)] backdrop-blur sm:static sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:shadow-none">
+          <p className="mb-2 text-center text-xs text-[#999999] sm:hidden">입력을 마치면 아래 버튼으로 관계 리포트를 확인해요.</p>
           <button type="submit" className="btn-primary w-full text-base sm:w-auto sm:text-sm disabled:cursor-not-allowed disabled:opacity-70" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
@@ -204,7 +201,7 @@ export default function MatchPage() {
               "관계 리포트 확인하기"
             )}
           </button>
-          {isSubmitting ? <p className="mt-2 text-center text-xs text-[#7b716a]">입력한 정보를 바탕으로 리포트를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
+          {isSubmitting ? <p className="mt-2 text-center text-xs text-[#999999]">입력한 정보를 바탕으로 리포트를 정리하고 있어요. 잠시만 기다려 주세요.</p> : null}
         </div>
       </form>
     </div>

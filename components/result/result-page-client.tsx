@@ -12,12 +12,12 @@ function ScoreGauge({ score }: { score: number }) {
     <div
       className="relative mx-auto flex h-32 w-32 items-center justify-center rounded-full sm:mx-0 sm:h-36 sm:w-36"
       style={{
-        background: `conic-gradient(#cb5d3a ${score * 3.6}deg, #f4e0d5 ${score * 3.6}deg 360deg)`,
+        background: `conic-gradient(#000000 ${score * 3.6}deg, #E9E9E9 ${score * 3.6}deg 360deg)`,
       }}
     >
-      <div className="flex h-[5.6rem] w-[5.6rem] flex-col items-center justify-center rounded-full border border-[#f0d4c7] bg-white shadow-inner sm:h-24 sm:w-24">
-        <p className="text-2xl font-semibold text-[#b34829] sm:text-[1.7rem]">{score}</p>
-        <p className="text-[11px] tracking-wide text-[#817771]">/ 100</p>
+      <div className="flex h-[5.6rem] w-[5.6rem] flex-col items-center justify-center rounded-full border border-[#E9E9E9] bg-white shadow-inner sm:h-24 sm:w-24">
+        <p className="text-2xl font-semibold text-black sm:text-[1.7rem]">{score}</p>
+        <p className="text-[11px] tracking-wide text-[#666666]">/ 100</p>
       </div>
     </div>
   );
@@ -134,8 +134,8 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
       <div className="section-gap pb-6">
         <section className="surface-card space-y-3 fade-up" aria-live="polite">
           <p className="section-head">리포트 확인 중</p>
-          <div className="flex items-center gap-2 text-sm text-[#605852]">
-            <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-[#f4c7b3] border-t-[#ca5d39]" aria-hidden />
+          <div className="flex items-center gap-2 text-sm text-[#666666]">
+            <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-[#E9E9E9] border-t-black" aria-hidden />
             저장된 관계 리포트를 불러오고 있어요.
           </div>
         </section>
@@ -180,7 +180,7 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
       <header className="surface-card overflow-hidden space-y-4 fade-up sm:space-y-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="badge-soft">저장된 관계 리포트</p>
-          <p className="max-w-full break-all text-xs font-medium tracking-wide text-[#aa4f31]">리포트 ID: {result.resultId}</p>
+          <p className="max-w-full break-all text-xs font-medium tracking-wide text-[#666666]">리포트 ID: {result.resultId}</p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-5">
@@ -188,21 +188,21 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
 
           <div className="space-y-2.5 sm:space-y-3">
             <h1 className="title-xl break-words">
-              {result.summary.personAName} <span className="text-[#ca5d39]">×</span> {result.summary.personBName}
+              {result.summary.personAName} <span className="text-black">×</span> {result.summary.personBName}
             </h1>
             <div className="flex flex-wrap items-center gap-2">
               <p className="badge-soft max-w-full break-words">관계 리듬 유형 · {result.summary.relationType}</p>
               <p className="badge-muted">리포트 지표 {result.summary.score} / 100</p>
             </div>
-            <p className="rounded-2xl border border-[#f0d4c7] bg-[#fff3ec] px-3.5 py-3 text-sm font-medium leading-6 text-[#4f4742] sm:px-4 sm:text-base">
+            <p className="rounded-2xl border border-[#E9E9E9] bg-[#F6E8EC] px-3.5 py-3 text-sm font-medium leading-6 text-black sm:px-4 sm:text-base">
               {result.summary.oneLineSummary}
             </p>
           </div>
         </div>
 
         <div className="surface-muted py-3">
-          <p className="text-xs font-semibold tracking-wide text-[#8a7166]">리포트 읽는 순서</p>
-          <p className="mt-1 text-sm leading-6 text-[#605853]">
+          <p className="text-xs font-semibold tracking-wide text-[#666666]">리포트 읽는 순서</p>
+          <p className="mt-1 text-sm leading-6 text-[#666666]">
             요약 지표로 현재 흐름을 먼저 확인하고, 핵심 관찰 → 맞는 흐름 → 조율 메모 → 유지 가이드 순서로 읽으면 활용 포인트가 더 또렷해져요.
           </p>
         </div>
@@ -255,22 +255,22 @@ export function ResultPageClient({ resultId }: { resultId: string }) {
             링크 복사
           </button>
         </div>
-        {shareStatus === "success" ? <p className="text-sm text-emerald-700">공유 창을 열었어요. 같은 리포트를 함께 확인해 보세요.</p> : null}
-        {shareStatus === "fallback" ? <p className="text-sm text-emerald-700">공유 기능 대신 링크를 복사했어요. 바로 전달할 수 있어요.</p> : null}
-        {copyStatus === "success" ? <p className="text-sm text-emerald-700">링크를 복사했어요. 대화 중인 공간에 붙여 넣어 보세요.</p> : null}
+        {shareStatus === "success" ? <p className="text-sm text-[#666666]">공유 창을 열었어요. 같은 리포트를 함께 확인해 보세요.</p> : null}
+        {shareStatus === "fallback" ? <p className="text-sm text-[#666666]">공유 기능 대신 링크를 복사했어요. 바로 전달할 수 있어요.</p> : null}
+        {copyStatus === "success" ? <p className="text-sm text-[#666666]">링크를 복사했어요. 대화 중인 공간에 붙여 넣어 보세요.</p> : null}
         {copyStatus === "error" || shareStatus === "error" ? (
-          <p className="text-sm text-rose-600">지금은 공유가 원활하지 않아요. 잠시 후 다시 시도해 주세요.</p>
+          <p className="text-sm text-[#666666]">지금은 공유가 원활하지 않아요. 잠시 후 다시 시도해 주세요.</p>
         ) : null}
       </section>
 
       <ResultSection title="읽기 안내" icon="i" description="아래 기준을 함께 보면 리포트를 더 균형 있게 활용할 수 있어요.">
-        <ul className="space-y-2.5 text-sm leading-7 text-[#4f4742] sm:space-y-3 sm:text-base">
-          <li className="rounded-2xl border border-[#f0ddd2] bg-[#fffdfa] px-3.5 py-3 break-words sm:px-4">{result.notice.referenceOnly}</li>
-          <li className="rounded-2xl border border-[#f0ddd2] bg-[#fffdfa] px-3.5 py-3 break-words sm:px-4">{result.notice.variableByInput}</li>
+        <ul className="space-y-2.5 text-sm leading-7 text-black sm:space-y-3 sm:text-base">
+          <li className="rounded-2xl border border-[#E9E9E9] bg-white px-3.5 py-3 break-words sm:px-4">{result.notice.referenceOnly}</li>
+          <li className="rounded-2xl border border-[#E9E9E9] bg-white px-3.5 py-3 break-words sm:px-4">{result.notice.variableByInput}</li>
         </ul>
       </ResultSection>
 
-      <div className="sticky bottom-3 z-10 rounded-3xl border border-[#edcfc1] bg-white/92 p-2.5 shadow-[0_8px_24px_rgba(89,52,37,0.14)] backdrop-blur sm:static sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
+      <div className="sticky bottom-3 z-10 rounded-3xl border border-[#E9E9E9] bg-white/95 p-2.5 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur sm:static sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
         <div className="flex flex-col justify-start gap-2 sm:flex-row sm:flex-wrap">
           <Link href="/match" className="btn-secondary w-full sm:w-auto">
             정보 다시 입력
