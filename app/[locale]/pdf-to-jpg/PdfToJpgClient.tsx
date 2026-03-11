@@ -6,6 +6,14 @@ import type { Locale } from "@/src/lib/i18n";
 import { messages } from "@/src/lib/i18n";
 
 type Stage = "idle" | "preparing" | "uploading" | "converting" | "completed";
+const MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024;
+
+const isValidPdfFile = (candidate: File) => {
+  const isPdf = candidate.type === "application/pdf" || candidate.name.toLowerCase().endsWith(".pdf");
+  const isWithinSizeLimit = candidate.size <= MAX_FILE_SIZE_BYTES;
+
+  return isPdf && isWithinSizeLimit;
+};
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -16,19 +24,26 @@ export default function PdfToJpgClient({ locale }: { locale: Locale }) {
   const [message, setMessage] = useState<string>(t.ready);
 
   const isProcessing = stage !== "idle" && stage !== "completed";
-  const canConvert = useMemo(() => !!file && !isProcessing, [file, isProcessing]);
+  const isValidFile = useMemo(() => {
+    if (!file) {
+      return false;
+    }
+
+    return isValidPdfFile(file);
+  }, [file]);
+  const canConvert = useMemo(() => isValidFile && !isProcessing, [isValidFile, isProcessing]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selected = event.target.files?.[0] ?? null;
     setFile(selected);
-    setMessage(selected ? t.ready : t.noFile);
+    setMessage(selected && isValidPdfFile(selected) ? t.ready : t.noFile);
     if (stage === "completed") {
       setStage("idle");
     }
   };
 
   const handleConvert = async () => {
-    if (!file) {
+    if (!isValidFile) {
       setMessage(t.chooseAFileFirst);
       return;
     }
